@@ -7,12 +7,18 @@ let distY; // Y-axis distance to move
 let exponent = 4; // Determines the curve
 let x = 0.0; // Current x-coordinate
 let y = 0.0; // Current y-coordinate
-let step = 0.002; // Size of each step along the path
-let pct = 0.0; // Percentage traveled (0.0 to 1.0)
 let pauseBool = 0;
 let button;
 
+let step = 0.0001; // Size of each step along the path
+let t = 0.0; // Initial time
+let omega = 100.;
+let amplitude = 150.;
+
+let slider;
+
 function setup() {
+  createCanvas(400, 400);
   canvas = createCanvas(400, 400);
   canvas.parent('simple-sketch-holder');
   frameRate(60);
@@ -25,6 +31,15 @@ function setup() {
   button.mousePressed(pauseDraw);
   button.parent('simple-sketch-holder');
 
+  slider = createSlider(0, 255, 100);
+  slider.position(10, 10);
+  slider.style('width', '80px');
+
+}
+
+function draw() {
+  let val = slider.value();
+  background(val);
 }
 
 function draw() {
@@ -33,26 +48,24 @@ function draw() {
   
   //fill(0);
   //rect(50, 50, width, height);
-  pct += step;
-  if (pct > -1) {
-    x = beginX + 150 * cos(20*pct);
-    y = beginY + 150 * sin(20*pct);
+  t += step;
+  
+  x = beginX + amplitude * cos(omega*t);
+  y = beginY + amplitude * sin(omega*t);
+
+  noFill();
+  beginShape();
+  for (let i = 0; i < t; i += 1*step){
+    curveVertex(beginX + amplitude * cos(omega*i) , beginY + amplitude * sin(omega*i) )
   }
+  endShape();
+
   fill(255);
   noStroke();
   ellipse(x, y, 20, 20);
   stroke("red");
-  /*
-  for (let i=0; i<pct; i = i+step){
-    point(beginX + i * distX , beginY + 1.*sin(32*i)*pow(1.27,-16*i) * distY)
-  }
-  */
-  noFill();
-  beginShape();
-  for (let i=0; i<pct; i +=1*step){
-    curveVertex(beginX + 150 * cos(20*i) , y = beginY + 150 * sin(20*i))
-  }
-  endShape();
+  
+  
 
 }
 
