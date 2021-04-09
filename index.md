@@ -14,6 +14,8 @@ Ejemplo:
 	<script type="text/javascript" src="moon_01.js"></script>
 </div>
 
+Más ejemplos:
 
+[moon_01](./tests/moon_01/moon.html)
 
 asdasd
