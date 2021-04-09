@@ -45,12 +45,12 @@ function setup() {
 	distX = endX - beginX;
 	distY = endY - beginY;
 
-	/*button = createButton('click me');
-	button.position(0, 0);
+	button = createButton('Pausa');
+	button.position(canvas_w-60, 5);
 	button.mousePressed(pauseDraw);
 	button.parent('simple-sketch-holder');
 
-	slider = createSlider(0, 255, 100);
+	/*slider = createSlider(0, 255, 100);
 	slider.position(0, 0);
 	slider.style('width', '80px');
 	slider.parent('simple-sketch-holder');*/
@@ -98,10 +98,10 @@ function draw() {
 	x2 = x + radius2 * cos(omega2*t);
 	y2 = y + radius2 * sin(omega2*t);
 
-	textSize(32);
+	/*textSize(32);
 	fill('white');
 	stroke('black');
-	text(windowWidth, 100, 50);
+	text(windowWidth, 100, 50);*/
 	
 	//text(t2_ini, canvas_w/2, 100);
 
