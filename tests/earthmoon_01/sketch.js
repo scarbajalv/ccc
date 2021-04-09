@@ -31,6 +31,12 @@ var t2_ini = 0;
 // ##################### SETUP #####################
 
 function setup() {
+
+	if(windowWidth > 720) canvas_w = 720;
+	else canvas_w = windowWidth;
+	canvas_h = canvas_w;
+	radius1 = 0.325*canvas_w;
+	radius2 = 0.1*canvas_w;
 	//createCanvas(400, 400);
 	canvas = createCanvas(canvas_w, canvas_h);
 	canvas.parent('simple-sketch-holder');
@@ -86,22 +92,22 @@ function draw() {
 	//rect(50, 50, width, height);
 	t += step;
 
-	x = beginX + radius1 * cos(omega*t);
-	y = beginY + radius1 * sin(omega*t);
+	x = canvas_w/2 + radius1 * cos(omega*t);
+	y = canvas_h/2 + radius1 * sin(omega*t);
 
 	x2 = x + radius2 * cos(omega2*t);
 	y2 = y + radius2 * sin(omega2*t);
 
-	/*textSize(32);
+	textSize(32);
 	fill('white');
 	stroke('black');
-	text('t = '+t, 100, 50);*/
+	text(windowWidth, 100, 50);
 	
 	//text(t2_ini, canvas_w/2, 100);
 
 	if (checkboxTray.checked()){
-		drawTrayectory(t,  beginX,  beginY, 'lightblue');
-		drawTrayectory2(t,  beginX,  beginY, 'gray');
+		drawTrayectory(t,  canvas_w/2,  canvas_h/2, 'lightblue');
+		drawTrayectory2(t,  canvas_w/2,  canvas_h/2, 'gray');
 	}
 	
 	//noStroke();
@@ -179,6 +185,7 @@ function drawTrayectory(t,  x0,  y0, myColor) {
 function drawTrayectory2(t,  x0,  y0, myColor) {
 	stroke(myColor);
 	noFill();
+	strokeWeight(0.002*canvas_w);
 	drawingContext.setLineDash([3, 5]);
 	var t2_final = t;
 	
