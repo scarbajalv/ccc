@@ -8,14 +8,13 @@ layout: default
 
 ## BIENVENIDO AL CCC (PRUEBA 2)
 
-Ejemplo:
-
-<div id="simple-sketch-holder" style="position: relative;">
-	<script type="text/javascript" src="moon_01.js"></script>
-</div>
-
-Más ejemplos:
+Ejemplos:
 
 [moon_01](./tests/moon_01/moon.html)
 
-asdasd
+[earthmoon_01](./tests/earthmoon_01/index.html)
+
+<!--
+<div id="simple-sketch-holder" style="position: relative;">
+	<script type="text/javascript" src="moon_01.js"></script>
+</div> -->

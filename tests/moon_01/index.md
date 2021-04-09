@@ -11,11 +11,6 @@ layout: default
 Ejemplo:
 
 <div id="simple-sketch-holder" style="position: relative;">
-	<script type="text/javascript" src="moon_01.js"></script>
+	<script type="text/javascript" src="sketch.js"></script>
 </div>
 
-Más ejemplos:
-
-[moon_01]()
-
-asdasd

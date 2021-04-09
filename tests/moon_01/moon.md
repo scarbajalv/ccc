@@ -14,8 +14,3 @@ Ejemplo:
 	<script type="text/javascript" src="sketch.js"></script>
 </div>
 
-Más ejemplos:
-
-[moon_01](tests/)
-
-asdasd

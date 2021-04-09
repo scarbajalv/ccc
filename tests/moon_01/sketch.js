@@ -23,6 +23,8 @@ let amplitude = 0.4*canvas_w;
 
 let slider;
 
+var t2_ini = 0;
+
 // ##################### SETUP #####################
 
 function setup() {
@@ -49,16 +51,17 @@ function setup() {
 
 	checkboxTray = createCheckbox('Trayectoria', false);
 	checkboxTray.style('color','white');
-	checkboxTray.style('font-size','20px');
+	checkboxTray.style('font-size',16+'px');
   checkboxTray.parent('simple-sketch-holder');
   checkboxTray.position(0, 0);
+  checkboxTray.changed(test01);
 
   checkboxRad1 = createCheckbox('Radios', false);
 	checkboxRad1.style('color','white');
-	checkboxRad1.style('font-size','20px');
+	checkboxRad1.style('font-size',16+'px');
   checkboxRad1.parent('simple-sketch-holder');
   checkboxRad1.position(0, 20);
-  //checkbox.changed(checkTrayectoryEvent);
+  
 
 }
 
@@ -72,6 +75,8 @@ function setup() {
 function draw() {
 
 	background(0);
+	stroke('black');
+	fill('white');
 
 	//fill(0);
 	//rect(50, 50, width, height);
@@ -84,6 +89,8 @@ function draw() {
 	fill('white');
 	stroke('black');
 	text('t = '+t, 100, 50);*/
+	
+	//text(t2_ini, canvas_w/2, 100);
 
 	if (checkboxTray.checked()){
 		drawTrayectory(t,  x,  y);
@@ -100,11 +107,16 @@ function draw() {
 	  drawArrow(v0, v1, 'red');
 	}
 
-
-
 }
 
 // ##################### FUNCTIONS #####################
+
+function test01(){
+	t2_ini = t;
+	//if (t2_ini == 0) t2_ini = 1;
+	//else t2_ini = 0;
+	
+}
 
 function checkTrayectoryEvent() {
   if (this.checked()) {
@@ -112,7 +124,7 @@ function checkTrayectoryEvent() {
   }
 }
 
-function drawTrayectory(t,  x,  y) {
+/*function drawTrayectory(t,  x,  y) {
 	stroke('white');
 	noFill();
 	drawingContext.setLineDash([3, 5]);
@@ -125,8 +137,22 @@ function drawTrayectory(t,  x,  y) {
 	  curveVertex(beginX + amplitude * cos(omega*t2) , beginY + amplitude * sin(omega*t2) )
 	}
 	endShape();
+	drawingContext.setLineDash([3, 0]);
+}*/
+
+function drawTrayectory(t,  x,  y) {
+	stroke('white');
+	noFill();
+	drawingContext.setLineDash([3, 5]);
+	var t2_final;
+	if(t - t2_ini <= 2*pi/omega) t2_final = t;
+	else t2_final = t2_ini + 2*pi/omega + step;
 	
-		
+	beginShape();	
+	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*step){
+	  curveVertex(beginX + amplitude * cos(omega*t2) , beginY + amplitude * sin(omega*t2) )
+	}
+	endShape();
 	drawingContext.setLineDash([3, 0]);
 }
 
@@ -155,4 +181,6 @@ function drawArrow(base, vec, myColor) {
   translate(vec.mag() - arrowSize, 0);
   triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
   pop();
+  stroke('black');
+  fill('white');
 }
