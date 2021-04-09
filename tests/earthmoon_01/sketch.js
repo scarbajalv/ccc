@@ -32,8 +32,8 @@ var t2_ini = 0;
 
 function setup() {
 
-	if(windowWidth > 720) canvas_w = 720;
-	else canvas_w = windowWidth;
+	if(windowWidth > 655) canvas_w = 655;
+	else canvas_w = windowWidth - 55;
 	canvas_h = canvas_w;
 	radius1 = 0.325*canvas_w;
 	radius2 = 0.1*canvas_w;
