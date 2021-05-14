@@ -10,9 +10,9 @@ layout: default
 
 Ejemplos:
 
-[moon_01](./tests/moon_01/moon.html)
+[Luna orbitando la Tierra](./tests/moon_01/moon.html)
 
-[earthmoon_01](./tests/earthmoon_01/index.html)
+[Luna y Tierra orbitando al Sol](./tests/earthmoon_01/index.html)
 
 <!--
 <div id="simple-sketch-holder" style="position: relative;">

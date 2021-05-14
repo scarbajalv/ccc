@@ -12,8 +12,8 @@ let button;
 
 let step = 0.0001; // Size of each step along the path
 let t = 0.0; // Initial time
-let omega = 100.;
-let omega2 = 550.;
+let omega = 50.;
+let omega2 = 300.;
 
 
 let canvas_w = 400;
@@ -93,10 +93,10 @@ function draw() {
 	t += step;
 
 	x = canvas_w/2 + radius1 * cos(omega*t);
-	y = canvas_h/2 + radius1 * sin(omega*t);
+	y = canvas_h/2 - radius1 * sin(omega*t);
 
 	x2 = x + radius2 * cos(omega2*t);
-	y2 = y + radius2 * sin(omega2*t);
+	y2 = y - radius2 * sin(omega2*t);
 
 	/*textSize(32);
 	fill('white');
@@ -176,7 +176,7 @@ function drawTrayectory(t,  x0,  y0, myColor) {
 	
 	beginShape();	
 	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*step){
-	  curveVertex(x0 + radius1*cos(omega*t2) , y0 + radius1*sin(omega*t2) )
+	  curveVertex(x0 + radius1*cos(omega*t2) , y0 - radius1*sin(omega*t2) )
 	}
 	endShape();
 	drawingContext.setLineDash([3, 0]);
@@ -192,7 +192,7 @@ function drawTrayectory2(t,  x0,  y0, myColor) {
 	beginShape();	
 	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*step){
 	  curveVertex(x0 + radius1*cos(omega*t2) + radius2*cos(omega2*t2), 
-	  	y0 + radius1*sin(omega*t2) + radius2*sin(omega2*t2) )
+	  	y0 - radius1*sin(omega*t2) - radius2*sin(omega2*t2) )
 	}
 	endShape();
 	drawingContext.setLineDash([3, 0]);

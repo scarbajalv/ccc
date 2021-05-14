@@ -19,7 +19,7 @@ let canvas_w = 400;
 let canvas_h = 400;
 let beginX = canvas_w/2; // Initial x-coordinate
 let beginY = canvas_h/2; // Initial y-coordinate
-let amplitude = 0.4*canvas_w;
+let radius1 = 0.4*canvas_w;
 
 let slider;
 
@@ -28,6 +28,12 @@ var t2_ini = 0;
 // ##################### SETUP #####################
 
 function setup() {
+	//createCanvas(400, 400);
+	if(windowWidth > 655) canvas_w = 655;
+	else canvas_w = windowWidth - 55;
+	canvas_h = canvas_w;
+	radius1 = 0.325*canvas_w;
+	radius2 = 0.1*canvas_w;
 	//createCanvas(400, 400);
 	canvas = createCanvas(canvas_w, canvas_h);
 	canvas.parent('simple-sketch-holder');
@@ -82,8 +88,8 @@ function draw() {
 	//rect(50, 50, width, height);
 	t += step;
 
-	x = beginX + amplitude * cos(omega*t);
-	y = beginY + amplitude * sin(omega*t);
+	x = canvas_w/2 + radius1 * cos(omega*t);
+	y = canvas_h/2 - radius1 * sin(omega*t);
 
 	/*textSize(32);
 	fill('white');
@@ -134,7 +140,7 @@ function checkTrayectoryEvent() {
 	
 	beginShape();	
 	for (var t2 = 0; t2 < t2_final; t2 += 1*step){
-	  curveVertex(beginX + amplitude * cos(omega*t2) , beginY + amplitude * sin(omega*t2) )
+	  curveVertex(beginX + radius1 * cos(omega*t2) , beginY + radius1 * sin(omega*t2) )
 	}
 	endShape();
 	drawingContext.setLineDash([3, 0]);
@@ -150,7 +156,7 @@ function drawTrayectory(t,  x,  y) {
 	
 	beginShape();	
 	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*step){
-	  curveVertex(beginX + amplitude * cos(omega*t2) , beginY + amplitude * sin(omega*t2) )
+	  curveVertex(canvas_w/2 + radius1 * cos(omega*t2) , canvas_h/2 - radius1 * sin(omega*t2) )
 	}
 	endShape();
 	drawingContext.setLineDash([3, 0]);
