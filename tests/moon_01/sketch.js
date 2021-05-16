@@ -10,9 +10,12 @@ let y = 0.0; // Current y-coordinate
 let pauseBool = 0;
 let button;
 
-let step = 0.0001; // Size of each step along the path
+let stepConfig = 0.0001; // Size of each step along the path
+let step = stepConfig;
 let t = 0.0; // Initial time
-let omega = 100.;
+let omegaconfig = 50.;
+let omega = omegaconfig;
+let delta = 0;
 
 
 let canvas_w = 400;
@@ -34,39 +37,59 @@ function setup() {
 	canvas_h = canvas_w;
 	radius1 = 0.325*canvas_w;
 	radius2 = 0.1*canvas_w;
-	//createCanvas(400, 400);
+	
 	canvas = createCanvas(canvas_w, canvas_h);
 	canvas.parent('simple-sketch-holder');
 	frameRate(60);
-	//noStroke();
+	
+	beginX = canvas_w/2; // Initial x-coordinate
+	beginY = canvas_h/2; // Initial y-coordinate
 	distX = endX - beginX;
 	distY = endY - beginY;
 
-	/*button = createButton('click me');
-	button.position(0, 0);
+	button = createButton('Pausa');
+	button.position(canvas_w-60, 5);
 	button.mousePressed(pauseDraw);
 	button.parent('simple-sketch-holder');
 
-	slider = createSlider(0, 255, 100);
-	slider.position(0, 0);
-	slider.style('width', '80px');
-	slider.parent('simple-sketch-holder');*/
+	/*button2 = createButton('NewPausa');
+	button2.position(canvas_w-60, 25);
+	button2.mousePressed(NewpauseDraw);
+	button2.parent('simple-sketch-holder');*/
 
 	img_earth = loadImage('img-earth.png'); // Load the image
 	img_moon = loadImage('img-moon.png'); // Load the image
 
-	checkboxTray = createCheckbox('Trayectoria', false);
-	checkboxTray.style('color','white');
-	checkboxTray.style('font-size',16+'px');
-  checkboxTray.parent('simple-sketch-holder');
-  checkboxTray.position(0, 0);
-  checkboxTray.changed(test01);
+	checkboxTrayec = createCheckbox('Trayectoria', false);
+	checkboxTrayec.style('color','white');
+	checkboxTrayec.style('font-size',16+'px');
+  checkboxTrayec.parent('simple-sketch-holder');
+  checkboxTrayec.position(0, 0);
+  checkboxTrayec.changed(test01);
 
   checkboxRad1 = createCheckbox('Radios', false);
 	checkboxRad1.style('color','white');
 	checkboxRad1.style('font-size',16+'px');
   checkboxRad1.parent('simple-sketch-holder');
   checkboxRad1.position(0, 20);
+
+  checkboxAxes = createCheckbox('Axes', false);
+	checkboxAxes.style('color','white');
+	checkboxAxes.style('font-size',16+'px');
+  checkboxAxes.parent('simple-sketch-holder');
+  checkboxAxes.position(0, 40);
+
+  checkboxTheta = createCheckbox('Ángulo', false);
+	checkboxTheta.style('color','white');
+	checkboxTheta.style('font-size',16+'px');
+  checkboxTheta.parent('simple-sketch-holder');
+  checkboxTheta.position(0, 60);
+
+  checkboxCoord = createCheckbox('Coordenadas', false);
+	checkboxCoord.style('color','white');
+	checkboxCoord.style('font-size',16+'px');
+  checkboxCoord.parent('simple-sketch-holder');
+  checkboxCoord.position(0, 80);
   
 
 }
@@ -84,34 +107,84 @@ function draw() {
 	stroke('black');
 	fill('white');
 
-	//fill(0);
-	//rect(50, 50, width, height);
 	t += step;
+	var theta = omega*t;
 
-	x = canvas_w/2 + radius1 * cos(omega*t);
-	y = canvas_h/2 - radius1 * sin(omega*t);
+	x = canvas_w/2 + radius1 * cos(omega*t + delta);
+	y = canvas_h/2 - radius1 * sin(omega*t + delta);
 
-	/*textSize(32);
-	fill('white');
-	stroke('black');
-	text('t = '+t, 100, 50);*/
-	
-	//text(t2_ini, canvas_w/2, 100);
-
-	if (checkboxTray.checked()){
-		drawTrayectory(t,  x,  y);
+	if (checkboxTrayec.checked()){
+		if(!checkboxAxes.checked()){
+			drawTrayectory(t,  x,  y);
+		}
 	}
 	
 	//noStroke();
 	image(img_moon, x-img_moon.width/2, y - img_moon.height/2 );
 	image(img_earth, canvas_w/2 - img_earth.width/2, canvas_h/2 - img_earth.height/2);
-	
+
+	if (checkboxAxes.checked()){
+		
+		stroke("white");		
+		line(canvas_w/8, canvas_h/2 , canvas_w - canvas_w/8, canvas_h/2);
+		line(canvas_h/2, canvas_w/8 , canvas_h/2 , canvas_w - canvas_w/8);
+
+		noFill();
+		drawingContext.setLineDash([3, 5]);
+		line(canvas_w/2, canvas_h/2 , x, y);
+		beginShape();
+		for (var itheta = 0; itheta < 2*pi; itheta += 0.01){
+		  curveVertex(canvas_w/2 + radius1 * cos(itheta) , canvas_h/2 - radius1 * sin(itheta) )
+		}
+		endShape();
+		drawingContext.setLineDash([3, 0]);
+	}
+
+	if (checkboxTheta.checked()){
+		if(checkboxAxes.checked()){
+			fill('white');
+			noStroke();
+			var thetaSimple = theta - int(theta/(2*pi))*(2*pi);
+			number = (Math.round(thetaSimple * 100) / 100/ pi).toFixed(2);
+			textSize(canvas_w/30);
+			textFont('Garamond');
+			text("θ = "+number+" π", canvas_w/2+canvas_w/12.5, canvas_h/2-canvas_h/50);
+			
+			stroke('red');
+			noFill();
+			beginShape();
+			for (var itheta = 0; itheta < thetaSimple; itheta += 0.01){
+			  curveVertex(canvas_w/2 + 0.2*radius1 * cos(itheta) , canvas_h/2 - 0.2*radius1 * sin(itheta) )
+			}
+			endShape();
+			stroke('white');
+		}	
+	}	
+
+	if (checkboxCoord.checked()){
+		if(checkboxAxes.checked()){
+			stroke('blue');
+			line(x, y, x, canvas_h/2);
+			line(x, y, canvas_w/2, y);
+			stroke('white');
+			noStroke();
+			fill('white');
+			textSize(canvas_w/30);
+			text(cos(theta).toFixed(2)+' R', x-canvas_w/30, canvas_h/2+canvas_h/30);
+			text(sin(theta).toFixed(2)+' R', canvas_w/2-canvas_w/10, y+canvas_h/80);
+			noFill();
+			stroke('white');
+		}
+	}
+
 	if (checkboxRad1.checked()){
 		stroke("red");
 		var v0 = createVector(canvas_w/2, canvas_h/2);
 	  var v1 = createVector(x - canvas_w/2, y - canvas_h/2);
 	  drawArrow(v0, v1, 'red');
-	}
+	}	
+
+		
 
 }
 
@@ -155,7 +228,7 @@ function drawTrayectory(t,  x,  y) {
 	else t2_final = t2_ini + 2*pi/omega + step;
 	
 	beginShape();	
-	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*step){
+	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*stepConfig){
 	  curveVertex(canvas_w/2 + radius1 * cos(omega*t2) , canvas_h/2 - radius1 * sin(omega*t2) )
 	}
 	endShape();
@@ -170,6 +243,15 @@ function pauseDraw() {
 	else{
 	  loop();
 	  pauseBool = 0;
+	}
+}
+
+function NewpauseDraw() {
+	if( step == stepConfig ){
+		step = 0;
+	}
+	else{
+	  step = stepConfig;
 	}
 }
 
