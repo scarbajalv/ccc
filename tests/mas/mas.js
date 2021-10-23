@@ -22,6 +22,14 @@ let delta = 0;
 let waveLength = 100;
 let waveNumber = 2*3.14159/waveLength;
 let waveSpeed = omega/waveNumber;
+let periodTime = 8;
+
+
+let period_slider;
+let period_button_increase;
+let period_button_decrease;
+let amplitude_button_increase;
+let amplitude_button_decrease;
 
 
 let canvas_w = 400;
@@ -29,6 +37,7 @@ let canvas_h = 400;
 let beginX = canvas_w/2; // Initial x-coordinate
 let beginY = canvas_h/2; // Initial y-coordinate
 let radius1 = 0.4*canvas_w;
+let amplitude;
 
 let slider;
 
@@ -48,10 +57,43 @@ function setup() {
 	if(windowWidth > 655) canvas_w = 655;
 	else canvas_w = windowWidth - 55;
 	canvas_h = canvas_w;
+	amplitude = (25/100)*canvas_h;
 
 	canvas = createCanvas(canvas_w, canvas_h);
 	canvas.parent('simple-sketch-holder');
 	frameRate(framerate_custom);
+
+	/*period_slider = createSlider(0,10,3,1);
+	period_slider.position(100,100);
+	period_slider.style("width", '80px');
+	period_slider.parent('simple-sketch-holder');
+  period_slider.changed(() => {
+    t = 0;
+  });*/
+
+  period_button_increase = createButton("+");
+  period_button_increase.parent('simple-sketch-holder');
+  period_button_increase.position(200,200);
+  period_button_increase.style("width","25"+"px");
+  period_button_increase.mousePressed(increasePeriod);
+
+  period_button_decrease = createButton("-");
+  period_button_decrease.parent('simple-sketch-holder');
+  period_button_decrease.style("width","25"+"px");
+  period_button_decrease.position(250,200);
+  period_button_decrease.mousePressed(decreasePeriod);
+
+  amplitude_button_increase = createButton("+");
+  amplitude_button_increase.parent("simple-sketch-holder");
+  amplitude_button_increase.style("width", "25px");
+  amplitude_button_increase.position(200, 300);
+  amplitude_button_increase.mousePressed(increaseAmplitude);
+
+  amplitude_button_decrease = createButton("-");
+  amplitude_button_decrease.parent("simple-sketch-holder");
+  amplitude_button_decrease.position(250, 300);
+  amplitude_button_decrease.style("width","25px");
+  amplitude_button_decrease.mousePressed(decreaseAmplitude);
 
 
 
@@ -81,9 +123,9 @@ function draw() {
 	};*/
 	//Math.round(num * 100) / 100;
 
+	//let periodTime = period_slider.value();
 
-	periodTime = 4;
-	amplitude = (10/100)*canvas_w;
+	//amplitude = (25/100)*canvas_w;
 
 	period = framerate_custom * periodTime * step;
 	omega = 2*3.1416/period;
@@ -96,8 +138,7 @@ function draw() {
 	axis_origin_y = (90/100)*canvas_h;
 	axis_zero_y = axis_origin_y - (25/100)*canvas_h;;
 
-	var x = amplitude*sin(omega*t);
-	var y = amplitude*sin(omega*t);
+	x = amplitude*sin(omega*t);
 
 	text("currentTime = " + currentTime.toFixed(2), canvas_w/2, 0.4*canvas_h/8);
 	/*text("omega = " + omega, canvas_w/2, 0.6*canvas_h/8);
@@ -108,7 +149,7 @@ function draw() {
 	text("step = " + step, canvas_w/2, 1.6*canvas_h/8);*/
 	text("x = " + x.toFixed(2), canvas_w/2, 1.8*canvas_h/8);
 
-	circle(canvas_w/2 + x, canvas_h/4, 3*canvas_w/100);
+	
 	//circle(canvas_w/2 + x, canvas_h/4, 2*canvas_w/100);
 
 	//circle(canvas_w/4 , canvas_h/2 + y, 2*canvas_w/100);
@@ -119,10 +160,44 @@ function draw() {
 
 	draw_XAxis();
 
+	draw_Oscillator();
+
 
 }
 
+// ##################### FUNCTIONS ####################
 
+function increaseAmplitude(){
+	if (amplitude < (25/100)*canvas_h){
+		amplitude = amplitude + (5/100)*canvas_h;
+		t = 0;
+	}
+}
+
+function decreaseAmplitude(){
+	if (amplitude > (5/100)*canvas_h){
+		amplitude = amplitude - (5/100)*canvas_h;
+		t = 0;
+	}
+}
+
+function resetTime(){
+	t = 0;
+}
+
+function increasePeriod(){
+	if (periodTime < 10){
+		periodTime = periodTime + 0.5;
+	}
+	t = 0;
+}
+
+function decreasePeriod(){
+	if (periodTime > 1){
+		periodTime = periodTime - 0.5;
+	}
+	t = 0;
+}
 
 
 function drawTrayectory_v3() {
@@ -246,91 +321,15 @@ function draw_XAxis(){
 }
 
 
+function draw_Oscillator(){
 
+	circle(canvas_w/2 + x, (25/100)*canvas_h, (3/100)*canvas_w);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//***********************************************************************
-//******************************* BACKUPS *******************************
-//***********************************************************************
-
-
-function drawTrayectory_old(t,  x,  y) {
 	stroke('white');
-	noFill();
-	drawingContext.setLineDash([3, 5]);
-	var t2_final;
-	if(t - t2_ini <= 2*pi/omega) t2_final = t;
-	else t2_final = t2_ini + 2*pi/omega + step;
-	
-	beginShape();	
-	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*stepConfig){
-	  curveVertex(canvas_w/2 + radius1 * cos(omega*t2) , canvas_h/2 - radius1 * sin(omega*t2) )
-	}
-	endShape();
-	drawingContext.setLineDash([3, 0]);
+	line( canvas_w/2 - (amplitude + (5/100)*canvas_w), (25/100)*canvas_h,
+				canvas_w/2 + (amplitude + (5/100)*canvas_w) , (25/100)*canvas_h);
+
+
+
 }
-
-
-function drawTrayectory_v2() {
-	stroke('white');
-	noFill();
-	//drawingContext.setLineDash([3, 0]);
-
-	var t2_ini = 0;
-	var waveNumber = 0.5*omega;
-	var waveSpeed = omega/waveNumber;
-	var t2_final = 1.5*(2*3.1416/waveNumber);
-	var t2_final = 0.03;
-	//var t2_final = waveSpeed*t;
-
-	
-	beginShape();	
-	for (var t2 = t2_ini; t2 < t2_final; t2 += 1*stepConfig){
-	  curveVertex( t2*1e4 + canvas_w/8 , -100*sin(waveNumber*t2 + omega*t) + canvas_h/2 )
-	}
-	endShape();
-	//drawingContext.setLineDash([3, 0]);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
