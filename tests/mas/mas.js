@@ -63,6 +63,9 @@ function setup() {
 
 function draw() {
 
+	var numb = 123.23454;
+	numb = numb.toFixed(2);
+
 	background(0);
 
 	stroke('black');
@@ -71,30 +74,39 @@ function draw() {
 	t += step;
 	nFrame += 1;
 	currentTime = nFrame/framerate_custom;
+	currentTime = (t/step)/framerate_custom;
+
+	/*if ( t > 500){
+		t = 0;		
+	};*/
+	//Math.round(num * 100) / 100;
 
 
 	periodTime = 4;
+	amplitude = (10/100)*canvas_w;
+
 	period = framerate_custom * periodTime * step;
 	omega = 2*3.1416/period;
 	waveLength = 0.5 * canvas_w;
 	waveNumber = 2*3.14159/waveLength;
 	waveSpeed = omega/waveNumber;
-	amplitude = 0.3*canvas_w;
+	
 
 	axis_origin_x = (1/8)*canvas_w;
-	axis_origin_y = (4/5)*canvas_h;
+	axis_origin_y = (90/100)*canvas_h;
+	axis_zero_y = axis_origin_y - (25/100)*canvas_h;;
 
 	var x = amplitude*sin(omega*t);
 	var y = amplitude*sin(omega*t);
 
-	text("currentTime = " + currentTime, canvas_w/2, 0.4*canvas_h/8);
-	text("omega = " + omega, canvas_w/2, 0.6*canvas_h/8);
+	text("currentTime = " + currentTime.toFixed(2), canvas_w/2, 0.4*canvas_h/8);
+	/*text("omega = " + omega, canvas_w/2, 0.6*canvas_h/8);
 	text("waveNumber = " + waveNumber, canvas_w/2, 0.8*canvas_h/8);
 	text("waveSpeed = " + waveSpeed, canvas_w/2, 1.0*canvas_h/8);
 	text(nFrame*step, canvas_w/2, 1.2*canvas_h/8);
 	text("t = " + t, canvas_w/2, 1.4*canvas_h/8);
-	text("step = " + step, canvas_w/2, 1.6*canvas_h/8);
-	text("x = " + x, canvas_w/2, 1.8*canvas_h/8);
+	text("step = " + step, canvas_w/2, 1.6*canvas_h/8);*/
+	text("x = " + x.toFixed(2), canvas_w/2, 1.8*canvas_h/8);
 
 	circle(canvas_w/2 + x, canvas_h/4, 3*canvas_w/100);
 	//circle(canvas_w/2 + x, canvas_h/4, 2*canvas_w/100);
@@ -104,6 +116,7 @@ function draw() {
 	drawTrayectory_v3();
 
 	draw_TimeAxis();
+
 	draw_XAxis();
 
 
@@ -113,7 +126,8 @@ function draw() {
 
 
 function drawTrayectory_v3() {
-	stroke('white');
+	stroke('gold');
+	strokeWeight(2);
 	noFill();	
 
 	var xW_ini = 0;
@@ -125,7 +139,7 @@ function drawTrayectory_v3() {
 		beginShape();
 		for (var xW = xW_ini; xW < xW_final; xW += 0.5){
 		  curveVertex( xW + axis_origin_x , 
-		  	-amplitude*sin(waveNumber* xW ) + axis_origin_y - amplitude)
+		  	-amplitude*sin(waveNumber* xW ) + axis_zero_y )
 		}
 		endShape();
 
@@ -133,10 +147,11 @@ function drawTrayectory_v3() {
 		beginShape();
 		for (var xW = xW_ini; xW < xW_final; xW += 0.5){
 		  curveVertex( xW + axis_origin_x , 
-		  	-amplitude*sin(waveNumber*(xW_final - xW) - omega*t + 3.1415926) + axis_origin_y - amplitude)
+		  	-amplitude*sin(waveNumber*(xW_final - xW) - omega*t + 3.1415926) + axis_zero_y)
 		}
 		endShape();
 	}
+	strokeWeight(1);
 	
 		
 
@@ -156,9 +171,16 @@ function draw_TimeAxis() {
 	drawingContext.setLineDash([3, 5]);
 	stroke('gray');
 	noFill();	
-	line(axis_origin_x, axis_origin_y - amplitude, 
-		axis_origin_x + (3/4)*canvas_w , axis_origin_y - amplitude);
+	line(axis_origin_x, axis_zero_y, 
+		axis_origin_x + (3/4)*canvas_w , axis_zero_y);
 	drawingContext.setLineDash([3, 0]);
+	noStroke();
+	fill("white");
+	textAlign(LEFT, CENTER);
+	//textSize(16);
+	text("t (s)", axis_origin_x + (3/4)*canvas_w + (1/100)*canvas_w , axis_origin_y);
+	//textSize(12);
+	noFill();
 	stroke('white');
 
 	if (t < t_limit) {
@@ -166,11 +188,16 @@ function draw_TimeAxis() {
 			axis_origin_x + (3/4)*canvas_w , axis_origin_y);
 		noStroke();
 		fill("white");
-		for (var i = 0; i <= Delta_cT ; i++){			
+		for (var i = 0; i <= Delta_cT ; i++){
 			textAlign(CENTER, TOP);
+			noStroke();
 			text(i, 
 				axis_origin_x + waveSpeed*framerate_custom*i*step, 
 				axis_origin_y - 0 + canvas_w/100);
+			stroke('white');
+			line(axis_origin_x + waveSpeed*framerate_custom*i*step, axis_origin_y + (0.5/100)*canvas_h,
+				axis_origin_x + waveSpeed*framerate_custom*i*step, axis_origin_y - (0.5/100)*canvas_h);
+			//line(0,0,100,100);
 		}
 	}
 	else{
@@ -182,10 +209,14 @@ function draw_TimeAxis() {
 		var i_final = int (currentTime - cT_limit + Delta_cT);
 		for (var i = i_ini; i <= i_final ; i++){			
 			textAlign(CENTER, TOP);
+			noStroke();
 			text(i, 
 				axis_origin_x + waveSpeed*framerate_custom*i*step - waveSpeed*(t - t_limit), 
 				axis_origin_y - 0 + canvas_w/100
 				);
+			stroke('white');
+			line(axis_origin_x + waveSpeed*framerate_custom*i*step - waveSpeed*(t - t_limit), axis_origin_y + (0.5/100)*canvas_h,
+				axis_origin_x + waveSpeed*framerate_custom*i*step - waveSpeed*(t - t_limit), axis_origin_y - (0.5/100)*canvas_h);
 		}
 	}
 	
@@ -195,13 +226,22 @@ function draw_TimeAxis() {
 function draw_XAxis(){
 
 	stroke("white");
-	line(axis_origin_x, axis_origin_y, axis_origin_x, axis_origin_y - 2*amplitude );
+	line(axis_origin_x, axis_origin_y, axis_origin_x, axis_origin_y - (50/100)*canvas_w);
 
 	noStroke();
 	textAlign(RIGHT, CENTER);
-	text("-"+amplitude, axis_origin_x - canvas_w/100, axis_origin_y );
-	text("0", axis_origin_x - canvas_w/100, axis_origin_y - amplitude );
-	text("+"+amplitude, axis_origin_x - canvas_w/100, axis_origin_y - 2*amplitude);
+	text("-"+amplitude, axis_origin_x - canvas_w/100, axis_zero_y + amplitude );
+	text("0", axis_origin_x - canvas_w/100, axis_zero_y );
+	text("+"+amplitude, axis_origin_x - canvas_w/100, axis_zero_y - amplitude);
+	textAlign(CENTER, CENTER);
+	text("x (m)", axis_origin_x, axis_zero_y - (25/100)*canvas_h - (2/100)*canvas_h );
+	stroke('white');
+	line(axis_origin_x - (0.5/100)*canvas_w, axis_zero_y + amplitude,
+			 axis_origin_x + (0.5/100)*canvas_w, axis_zero_y + amplitude);
+	line(axis_origin_x - (0.5/100)*canvas_w, axis_zero_y - amplitude,
+			 axis_origin_x + (0.5/100)*canvas_w, axis_zero_y - amplitude);
+	noStroke();
+	
 
 }
 
