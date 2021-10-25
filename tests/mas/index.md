@@ -11,6 +11,6 @@ layout: default
 Ejemplo:
 
 <div id="simple-sketch-holder" style="position: relative;">
-	<script type="text/javascript" src="mas.js"></script>
+	<script type="text/javascript" src="mas_v2.js"></script>
 </div>
 
