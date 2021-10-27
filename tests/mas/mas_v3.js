@@ -84,7 +84,8 @@ function setup() {
   button_amplitude_increase.mousePressed(f_amplitude_increase);
 
   checkbox_time_evolve = createCheckbox(' Play', false);
-  checkbox_time_evolve.position(500,500);
+  checkbox_time_evolve.parent("simple-sketch-holder");
+  checkbox_time_evolve.position(0.85*canvas_w, 0.05*canvas_h);
   //checkbox_time_evolve.changed(f_checkbox_time_evolve_changed);
 
   slider_time = createSlider(0, 10*framerate_custom, 
