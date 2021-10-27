@@ -1,3 +1,7 @@
+// FALTA:
+// 1. QUE TODO SEA EN FUNCION A FRAME_W Y FRAME_H. Por algún motivo no funciona.
+// 2. Que los tamaños de las letras sean múltiplos de canvas_w
+
 
 let x;
 let x_cm;
@@ -21,7 +25,7 @@ let button_period_increase;
 let button_period_decrease;
 let button_amplitude_increase;
 let button_amplitude_decrease;
-let pause_checkbox;
+let checkbox_gridlines;
 let checkbox_time_evolve;
 
 
@@ -53,7 +57,7 @@ function setup() {
 	else canvas_w = windowWidth - 55;
 	canvas_h = canvas_w;
 
-	amplitude = (0.25)*canvas_h;
+	amplitude = (0.20)*canvas_h;
 	amplitude_cm = amplitude/(0.25*canvas_h)*100;
 
 	axis_origin_x = (0.125)*canvas_w;
@@ -102,6 +106,10 @@ function setup() {
   slider_time.position( (0.375)*canvas_w, (0.075)*canvas_h);
   slider_time.style('width', str(0.25*canvas_w)+'px');
 
+  checkbox_gridlines = createCheckbox('Grid', true);
+  checkbox_gridlines.parent("simple-sketch-holder");
+  checkbox_gridlines.position(0.85*canvas_w, 0.085*canvas_h);
+
 
 }
 
@@ -138,10 +146,16 @@ function draw() {
 		slider_time.value(t*framerate_custom);
 	}
 
-	draw_Gridlines();
+	strokeWeight(1);
+	if( checkbox_gridlines.checked() ){
+		draw_Gridlines();
+	}
+	strokeWeight(1.5);
 	draw_TimeAxis();
 	draw_XAxis();
+	strokeWeight(3);
 	drawTrayectory_v3();
+	strokeWeight(1);
 	
 	
 
@@ -226,7 +240,7 @@ function f_slider_time_input(){
 // Gráfica x vs t
 function drawTrayectory_v3() {
 	stroke('gold');
-	strokeWeight(2);
+	//strokeWeight(2);
 	noFill();
 	// Las unidades de tAxis se encuentran en pixeles
 	
@@ -250,7 +264,7 @@ function drawTrayectory_v3() {
 		}
 		endShape();
 	}
-	strokeWeight(1);
+	//strokeWeight(1);
 	
 }
 
@@ -263,7 +277,7 @@ function draw_TimeAxis() {
 	// Línea x = 0	
 	//stroke('gray');
 	noFill();	
-	strokeWeight(2);
+	//strokeWeight(1.5);
 	line(axis_origin_x, axis_zero_y, 
 		axis_origin_x + i_time_max*waveSpeed , axis_zero_y);	
 
