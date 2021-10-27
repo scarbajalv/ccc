@@ -22,7 +22,7 @@ let delta = 0;
 let waveLength = 100;
 let waveNumber = 2*3.14159/waveLength;
 let waveSpeed = omega/waveNumber;
-let periodTime = 2;
+let periodTime = 8;
 
 
 let period_slider;
@@ -30,8 +30,6 @@ let period_button_increase;
 let period_button_decrease;
 let amplitude_button_increase;
 let amplitude_button_decrease;
-let pause_checkbox;
-let autoTime_checkbox;
 
 
 let canvas_w = 400;
@@ -42,10 +40,7 @@ let radius1 = 0.4*canvas_w;
 let amplitude;
 let amplitude_cm;
 
-let pixel_x_max;
-let delta_t = 9;
-
-let slider_time;
+let slider;
 
 var t2_ini = 0;
 
@@ -65,7 +60,6 @@ function setup() {
 	canvas_h = canvas_w;
 	amplitude = (25/100)*canvas_h;
 	amplitude_cm = amplitude/(0.25*canvas_h)*100;
-	pixel_x_max = (60/100)*canvas_w;
 
 	canvas = createCanvas(canvas_w, canvas_h);
 	canvas.parent('simple-sketch-holder');
@@ -103,15 +97,7 @@ function setup() {
   amplitude_button_increase.position(0.175*canvas_w, 0.1*canvas_h);
   amplitude_button_increase.mousePressed(increaseAmplitude);
 
-  autoTime_checkbox = createCheckbox(' Play', false);
-  autoTime_checkbox.position(500,500);
-  autoTime_checkbox.changed(pauseTime);
-
-  slider_time = createSlider(0, 10*framerate_custom*step, 
-  	0, 0.1*framerate_custom*step);
-  slider_time.parent("simple-sketch-holder");
-  slider_time.position( (0.375)*canvas_w, (0.075)*canvas_h);
-  slider_time.style('width', str(0.25*canvas_w)+'px');
+  
 
 
 
@@ -123,13 +109,16 @@ function setup() {
 
 function draw() {
 
+
+	var numb = 123.23454;
+	numb = numb.toFixed(2);
+
 	background(0);
 
 	stroke('black');
 	fill('white');
 
-
-	//t += step;
+	t += step;
 	nFrame += 1;
 	currentTime = nFrame/framerate_custom;
 	currentTime = (t/step)/framerate_custom;
@@ -145,7 +134,7 @@ function draw() {
 
 	period = framerate_custom * periodTime * step;
 	omega = 2*3.1416/period;
-	waveLength = (periodTime/delta_t)*pixel_x_max;
+	waveLength = 0.5 * canvas_w;
 	waveNumber = 2*3.14159/waveLength;
 	waveSpeed = omega/waveNumber;
 
@@ -181,29 +170,10 @@ function draw() {
 
 	draw_Oscillator();
 
-	if (autoTime_checkbox.checked()){
-		t += step;
-	}
-	else{
-		t = slider_time.value();
-	}
-
 
 }
 
 // ##################### FUNCTIONS ####################
-
-function pauseTime(){
-
-	if (pause_checkbox.checked()){
-		noLoop();
-	}
-	else{
-		loop();
-	}
-
-}
-
 
 function increaseAmplitude(){
 	if (amplitude < (25/100)*canvas_h){
@@ -246,15 +216,15 @@ function drawTrayectory_v3() {
 	noFill();	
 
 	var xW_ini = 0;
-	var xW_final = pixel_x_max; // pixel_x hasta donde se grafica
+	var xW_final = (2.5/4)*canvas_w;
 	var t_limit = (xW_final - xW_ini) / waveSpeed;
 
 	if ( t < t_limit ){
 		xW_final = waveSpeed*t;
 		beginShape();
 		for (var xW = xW_ini; xW < xW_final; xW += 0.5){
-		  curveVertex( axis_origin_x + xW , 
-		  	axis_zero_y - amplitude*cos(waveNumber* xW )  )
+		  curveVertex( xW + axis_origin_x , 
+		  	-amplitude*cos(waveNumber* xW ) + axis_zero_y )
 		}
 		endShape();
 
@@ -268,11 +238,16 @@ function drawTrayectory_v3() {
 	}
 	strokeWeight(1);
 	
+		
+
+	
 }
 
 function draw_TimeAxis() {	
 
-	var t_limit = (pixel_x_max) / waveSpeed; // instante en el cual se comienza a mover el plot
+	var xW_ini = 0; // Default 0, el plot inicia al inicio de los ejes
+	var xW_final = (2.5/4)*canvas_w; // es el grosor del eje X, no su coordenada final
+	var t_limit = (xW_final - xW_ini) / waveSpeed; // instante en el cual se comienza a mover el plot
 	var cT_limit = t_limit/(framerate_custom*step); // lo mismo que t_limit pero en tiempo real
 	// Delta_cT representa el int() del tiempo real que demora la función en llegar a xW_final
 	// El +2 es algo artificioso, debería poderse generalizar.
@@ -301,7 +276,7 @@ function draw_TimeAxis() {
 			axis_origin_x + (3/4)*canvas_w , axis_origin_y);
 		noStroke();
 		fill("white");
-		for (var i = 0; i <= Delta_cT + 1; i++){
+		for (var i = 0; i <= Delta_cT ; i++){
 			textAlign(CENTER, TOP);
 			noStroke();
 			text(i, 
@@ -321,7 +296,7 @@ function draw_TimeAxis() {
 		fill("white");
 		var i_ini = int (currentTime - cT_limit) + 1;
 		var i_final = int (currentTime - cT_limit + Delta_cT);
-		for (var i = i_ini; i <= i_final + 1; i++){			
+		for (var i = i_ini; i <= i_final ; i++){			
 			textAlign(CENTER, TOP);
 			noStroke();
 			text(i, 
