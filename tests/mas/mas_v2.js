@@ -334,7 +334,6 @@ function draw_TimeAxis() {
 		}
 	}
 	
-	
 }
 
 function draw_XAxis(){

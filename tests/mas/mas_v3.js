@@ -4,7 +4,7 @@ let x_cm;
 let y;
 
 // step is the change in the "t" parameter in each Frame
-// If deltaTime is the real elapsed time: deltaTime = FrameRate * delta_t * step
+// If deltaTime is the real elapsed time: deltaTime = FrameRate * tAxis_max_t * step
 let framerate_custom = 60; // set frameRate
 let stepConfig = 1;
 let step = stepConfig;
@@ -15,7 +15,7 @@ let delta = 0;
 let waveLength;
 let waveNumber;
 let waveSpeed;
-let period = 6;
+let period = 10;
 
 let button_period_increase;
 let button_period_decrease;
@@ -30,8 +30,8 @@ let canvas_h;
 let amplitude;
 let amplitude_cm;
 
-let pixel_x_max;
-let delta_t = 9;
+let tAxis_max;
+let tAxis_max_t = 10; // Máximo t a graficar en x vs t
 
 let slider_time;
 
@@ -53,7 +53,7 @@ function setup() {
 	canvas_h = canvas_w;
 	amplitude = (0.25)*canvas_h;
 	amplitude_cm = amplitude/(0.25*canvas_h)*100;
-	pixel_x_max = (60/100)*canvas_w;
+	tAxis_max = (60/100)*canvas_w;
 
 	canvas = createCanvas(canvas_w, canvas_h);
 	canvas.parent('simple-sketch-holder');
@@ -94,8 +94,6 @@ function setup() {
   slider_time.parent("simple-sketch-holder");
   slider_time.position( (0.375)*canvas_w, (0.075)*canvas_h);
   slider_time.style('width', str(0.25*canvas_w)+'px');
-  
-
 
 
 }
@@ -113,9 +111,9 @@ function draw() {
 	t = iFrame/framerate_custom;
 
 	omega = 2*3.1416/period;
-	waveLength = (period/delta_t)*pixel_x_max;
+	waveLength = (period/tAxis_max_t)*tAxis_max; // px
 	waveNumber = 2*3.14159/waveLength;
-	waveSpeed = omega/waveNumber;
+	waveSpeed = omega/waveNumber; // px/s
 
 	axis_origin_x = (1/8)*canvas_w;
 	axis_origin_y = (90/100)*canvas_h;
@@ -137,25 +135,30 @@ function draw() {
 		slider_time.value(t*framerate_custom);
 	}
 
+	drawTrayectory_v3();
+	draw_TimeAxis();
+	draw_XAxis();
+
 
 }
 
 // ##################### FUNCTIONS ####################
 
+// Botones para Periodo
 function f_period_increase(){
 	if (period < 10){
-		period = period + 0.5;
+		period = period + 1;
 	}
-	iFrame = 0;
+	//iFrame = 0;
 }
-
 function f_period_decrease(){
 	if (period > 1){
-		period = period - 0.5;
+		period = period - 1;
 	}
-	iFrame = 0;
+	//iFrame = 0;
 }
 
+// Botones para Amplitud
 function f_amplitude_increase(){
 	if (amplitude < (25/100)*canvas_h){
 		amplitude = amplitude + (5/100)*canvas_h;
@@ -172,6 +175,7 @@ function f_amplitude_decrease(){
 	}
 }
 
+// Oscilador
 function draw_Oscillator(){
 
 	var xpos_oscillator = canvas_w/2;
@@ -201,12 +205,135 @@ function draw_Oscillator(){
 	fill('white');
 	stroke('white');
 
-
-
-
 }
 
+// Acción al mover el slider
 function f_slider_time_input(){
 	checkbox_time_evolve.checked(false);
 	iFrame = slider_time.value();
+}
+
+
+
+// Gráfica x vs t
+function drawTrayectory_v3() {
+	stroke('gold');
+	strokeWeight(2);
+	noFill();
+	// Las unidades de tAxis se encuentran en pixeles
+	
+	var t_limit = (tAxis_max) / waveSpeed;
+	var tAxis_final;
+
+	if ( t < t_limit ){
+		tAxis_final = waveSpeed*t;
+		beginShape();
+		for (var tAxis = 0; tAxis < tAxis_final; tAxis += 0.5){
+		  curveVertex( axis_origin_x + tAxis , 
+		  	axis_zero_y - amplitude*cos(waveNumber* tAxis )  )
+		}
+		endShape();
+	}else{
+		tAxis_final = tAxis_max;
+		beginShape();
+		for (var tAxis = 0; tAxis < tAxis_final; tAxis += 0.5){
+		  curveVertex( axis_origin_x + tAxis , 
+		  	axis_zero_y - amplitude*cos(waveNumber*(tAxis_final - tAxis) - omega*t) )
+		}
+		endShape();
+	}
+	strokeWeight(1);
+	
+}
+
+// PLOTEAR EJE HORIZONTAL
+function draw_TimeAxis() {	
+
+	// instante en el cual se comienza a mover el plot
+	var t_limit = (tAxis_max) / waveSpeed; 
+	// Máximo tiempo que se plotea en el tAxis
+	var i_time_max = 12;
+
+	// Línea x = 0
+	drawingContext.setLineDash([3, 5]);
+	stroke('gray');
+	noFill();	
+	line(axis_origin_x, axis_zero_y, 
+		axis_origin_x + (3/4)*canvas_w , axis_zero_y);
+	drawingContext.setLineDash([3, 0]);
+
+	// Línea de eje temporal
+	stroke('white');
+	line(axis_origin_x, axis_origin_y, 
+			axis_origin_x + (3/4)*canvas_w , axis_origin_y);
+	noStroke();
+	fill("white");
+	textAlign(LEFT, CENTER);
+	text("t (s)", axis_origin_x + (3/4)*canvas_w + (1/100)*canvas_w , axis_origin_y);
+	noFill();
+	stroke('white');
+
+	if (t < t_limit) {		
+		noStroke();
+		fill("white");
+		// Los tiempos a plotear van de 0 a 12. i_time está en segundos.
+		for (var i_time = 0; i_time <= i_time_max; i_time++){
+			textAlign(CENTER, TOP);
+			noStroke();
+			// i_time*waveSpeed es el desplazamiento en píxeles de un tiempo a otro.
+			text(i_time, 
+				axis_origin_x + i_time*waveSpeed, axis_origin_y + canvas_w/100);
+			stroke('white');
+			line(	axis_origin_x + waveSpeed*i_time, axis_origin_y + (0.5/100)*canvas_h,
+						axis_origin_x + waveSpeed*i_time, axis_origin_y - (0.5/100)*canvas_h);
+		}
+	}
+	else{
+		noStroke();
+		fill("white");
+		// Calculamos el tiempo inicial y final a plotear
+		var i_time_ini = int (t - t_limit) + 1;
+		var i_time_final = int (t - t_limit + i_time_max);
+		// Ploteamos los tiempos
+		for (var i_time = i_time_ini; i_time <= i_time_final; i_time++){
+			textAlign(CENTER, TOP);
+			noStroke();
+			// Al agregar "-waveSpeed*(t-t_limit)" la onda se mueve hacia la izquierda
+			text(i_time, 
+				axis_origin_x + waveSpeed*i_time - waveSpeed*(t - t_limit), 
+				axis_origin_y - 0 + canvas_w/100 );
+			stroke('white');
+			line(	axis_origin_x + waveSpeed*i_time - waveSpeed*(t - t_limit), 
+							axis_origin_y + (0.5/100)*canvas_h,
+						axis_origin_x + waveSpeed*i_time - waveSpeed*(t - t_limit), 
+							axis_origin_y - (0.5/100)*canvas_h);
+		}
+	}
+	
+	
+}
+
+
+// PLOTEAR EJE VERTICAL
+function draw_XAxis(){
+
+	// Línea vertical
+	stroke("white");
+	line(axis_origin_x, axis_origin_y, axis_origin_x, axis_origin_y - (50/100)*canvas_w);
+
+	noStroke();
+	textAlign(RIGHT, CENTER);	
+	text("-"+amplitude_cm, axis_origin_x - canvas_w/100, axis_zero_y + amplitude );
+	text("0", axis_origin_x - canvas_w/100, axis_zero_y );
+	text("+"+amplitude_cm, axis_origin_x - canvas_w/100, axis_zero_y - amplitude);
+	textAlign(CENTER, CENTER);
+	text("x (cm)", axis_origin_x, axis_zero_y - (25/100)*canvas_h - (2/100)*canvas_h );
+	stroke('white');
+	line(axis_origin_x - (0.5/100)*canvas_w, axis_zero_y + amplitude,
+			 axis_origin_x + (0.5/100)*canvas_w, axis_zero_y + amplitude);
+	line(axis_origin_x - (0.5/100)*canvas_w, axis_zero_y - amplitude,
+			 axis_origin_x + (0.5/100)*canvas_w, axis_zero_y - amplitude);
+	noStroke();
+	
+
 }
