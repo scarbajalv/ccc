@@ -31,7 +31,8 @@ let amplitude;
 let amplitude_cm;
 
 let tAxis_max;
-let tAxis_max_t = 10; // Máximo t a graficar en x vs t
+let i_time_max = 12; // Máximo tiempo del eje horizontal
+let tAxis_max_t = 10; // Máximo t a graficar para la función
 
 let slider_time;
 
@@ -51,9 +52,15 @@ function setup() {
 	if(windowWidth > 655) canvas_w = 655;
 	else canvas_w = windowWidth - 55;
 	canvas_h = canvas_w;
+
 	amplitude = (0.25)*canvas_h;
 	amplitude_cm = amplitude/(0.25*canvas_h)*100;
-	tAxis_max = (60/100)*canvas_w;
+
+	axis_origin_x = (0.125)*canvas_w;
+	axis_origin_y = (85/100)*canvas_h;
+	axis_zero_y = axis_origin_y - (25/100)*canvas_h;
+	//tAxis_max = (60/100)*canvas_w;
+	tAxis_max = 0.625*canvas_w;
 
 	canvas = createCanvas(canvas_w, canvas_h);
 	canvas.parent('simple-sketch-holder');
@@ -110,14 +117,10 @@ function draw() {
 	//iFrame += 1;
 	t = iFrame/framerate_custom;
 
-	omega = 2*3.1416/period;
+	omega = 2*3.1415926/period;
 	waveLength = (period/tAxis_max_t)*tAxis_max; // px
-	waveNumber = 2*3.14159/waveLength;
-	waveSpeed = omega/waveNumber; // px/s
-
-	axis_origin_x = (1/8)*canvas_w;
-	axis_origin_y = (90/100)*canvas_h;
-	axis_zero_y = axis_origin_y - (25/100)*canvas_h;;
+	waveNumber = 2*3.1415926/waveLength;
+	waveSpeed = omega/waveNumber; // px/s	
 
 	x = amplitude*cos(omega*t);
 	x_cm = amplitude_cm*cos(omega*t);
@@ -135,9 +138,12 @@ function draw() {
 		slider_time.value(t*framerate_custom);
 	}
 
-	drawTrayectory_v3();
+	draw_Gridlines();
 	draw_TimeAxis();
 	draw_XAxis();
+	drawTrayectory_v3();
+	
+	
 
 
 }
@@ -193,17 +199,19 @@ function draw_Oscillator(){
 				canvas_w/2 , ypos_oscillator + (0.5/100)*canvas_w);	
 
 	noStroke();
+	fill('gold');
+	circle(canvas_w/2 + x, ypos_oscillator, (3/100)*canvas_w);
+	fill('white');
+	stroke('white');
+
+	noStroke();
 	textAlign(CENTER, TOP);
 	text( "-"+amplitude_cm , canvas_w/2 - (amplitude), ypos_oscillator + (1/100)*canvas_w);
 	text( "+"+amplitude_cm , canvas_w/2 + (amplitude), ypos_oscillator + (1/100)*canvas_w);
 	text( "x (cm)" , canvas_w/2 + (35/100)*canvas_w , ypos_oscillator);
 	stroke("white");
 
-	noStroke();
-	fill('gold');
-	circle(canvas_w/2 + x, ypos_oscillator, (3/100)*canvas_w);
-	fill('white');
-	stroke('white');
+	
 
 }
 
@@ -250,26 +258,25 @@ function drawTrayectory_v3() {
 function draw_TimeAxis() {	
 
 	// instante en el cual se comienza a mover el plot
-	var t_limit = (tAxis_max) / waveSpeed; 
-	// Máximo tiempo que se plotea en el tAxis
-	var i_time_max = 12;
+	var t_limit = (tAxis_max) / waveSpeed; 	
 
-	// Línea x = 0
-	drawingContext.setLineDash([3, 5]);
-	stroke('gray');
+	// Línea x = 0	
+	//stroke('gray');
 	noFill();	
+	strokeWeight(2);
 	line(axis_origin_x, axis_zero_y, 
-		axis_origin_x + (3/4)*canvas_w , axis_zero_y);
-	drawingContext.setLineDash([3, 0]);
+		axis_origin_x + i_time_max*waveSpeed , axis_zero_y);	
 
-	// Línea de eje temporal
+	// Líneas de eje temporal
 	stroke('white');
 	line(axis_origin_x, axis_origin_y, 
-			axis_origin_x + (3/4)*canvas_w , axis_origin_y);
+		axis_origin_x + i_time_max*waveSpeed , axis_origin_y);
+	line(axis_origin_x, axis_origin_y - 0.5*canvas_h, 
+		axis_origin_x + i_time_max*waveSpeed , axis_origin_y - 0.5*canvas_h);
 	noStroke();
 	fill("white");
 	textAlign(LEFT, CENTER);
-	text("t (s)", axis_origin_x + (3/4)*canvas_w + (1/100)*canvas_w , axis_origin_y);
+	text("t (s)", axis_origin_x + (3/4)*canvas_w , axis_origin_y);
 	noFill();
 	stroke('white');
 
@@ -309,17 +316,19 @@ function draw_TimeAxis() {
 							axis_origin_y - (0.5/100)*canvas_h);
 		}
 	}
-	
-	
 }
 
 
 // PLOTEAR EJE VERTICAL
 function draw_XAxis(){
 
+	var t_limit = (tAxis_max) / waveSpeed;
+
 	// Línea vertical
 	stroke("white");
 	line(axis_origin_x, axis_origin_y, axis_origin_x, axis_origin_y - (50/100)*canvas_w);
+	line(	axis_origin_x + i_time_max*waveSpeed, axis_origin_y, 
+				axis_origin_x + i_time_max*waveSpeed, axis_origin_y - (50/100)*canvas_w);
 
 	noStroke();
 	textAlign(RIGHT, CENTER);	
@@ -334,6 +343,71 @@ function draw_XAxis(){
 	line(axis_origin_x - (0.5/100)*canvas_w, axis_zero_y - amplitude,
 			 axis_origin_x + (0.5/100)*canvas_w, axis_zero_y - amplitude);
 	noStroke();
-	
 
+}
+
+
+// PLOTEAR GRIDLINES
+function draw_Gridlines() {	
+
+	//	VERTICAL
+
+	// instante en el cual se comienza a mover el plot
+	var t_limit = (tAxis_max) / waveSpeed; 
+
+	if (t < t_limit) {		
+		noStroke();
+		fill("white");
+		// Los tiempos a plotear van de 0 a 12. i_time está en segundos.
+		for (var i_time = 0; i_time <= i_time_max; i_time++){
+			if (i_time == i_time_max) continue;
+			textAlign(CENTER, TOP);
+			noStroke();
+			// i_time*waveSpeed es el desplazamiento en píxeles de un tiempo a otro.
+			stroke('gray');
+			//drawingContext.setLineDash([3, 5]);
+			line(	axis_origin_x + waveSpeed*i_time, axis_origin_y - (50/100)*canvas_h,
+						axis_origin_x + waveSpeed*i_time, axis_origin_y);
+			//drawingContext.setLineDash([3, 0]);
+			stroke('white');
+		}
+	}
+	else{
+		noStroke();
+		fill("white");
+		// Calculamos el tiempo inicial y final a plotear
+		var i_time_ini = int (t - t_limit) + 1;
+		var i_time_final = int (t - t_limit + i_time_max);
+		// Ploteamos los tiempos
+		for (var i_time = i_time_ini; i_time <= i_time_final; i_time++){
+			//if ( t == t_limit && i_time == i_time_final) continue;
+			textAlign(CENTER, TOP);
+			noStroke();
+			// Al agregar "-waveSpeed*(t-t_limit)" la onda se mueve hacia la izquierda
+			stroke('gray');
+			//drawingContext.setLineDash([3, 5]);
+			line(	axis_origin_x + waveSpeed*i_time - waveSpeed*(t - t_limit), 
+							axis_origin_y - (50/100)*canvas_h,
+						axis_origin_x + waveSpeed*i_time - waveSpeed*(t - t_limit), 
+							axis_origin_y);
+			//drawingContext.setLineDash([3, 0]);
+			stroke('white');
+		}
+	}
+
+	// HORIZONTAL
+
+	stroke('gray');
+	//drawingContext.setLineDash([3, 5]);
+	for ( i = 1; i < 5; i++){
+		line(axis_origin_x , axis_zero_y - i*(5/100)*canvas_h,
+			axis_origin_x + i_time_max*waveSpeed, axis_zero_y - i*(5/100)*canvas_h);
+	}
+	for ( i = -5; i < 0; i++){
+		line(axis_origin_x , axis_zero_y - i*(5/100)*canvas_h,
+			axis_origin_x + i_time_max*waveSpeed, axis_zero_y - i*(5/100)*canvas_h);
+	}
+	//drawingContext.setLineDash([3, 0]);
+	stroke('white');	
+	
 }
