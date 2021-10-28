@@ -213,7 +213,7 @@ function draw_Oscillator(){
 				canvas_w/2 , ypos_oscillator + (0.5/100)*canvas_w);	
 
 	noStroke();
-	fill('gold');
+	fill('yellow');
 	circle(canvas_w/2 + x, ypos_oscillator, (3/100)*canvas_w);
 	fill('white');
 	stroke('white');
@@ -239,7 +239,7 @@ function f_slider_time_input(){
 
 // Gráfica x vs t
 function drawTrayectory_v3() {
-	stroke('gold');
+	stroke('yellow');
 	//strokeWeight(2);
 	noFill();
 	// Las unidades de tAxis se encuentran en pixeles
