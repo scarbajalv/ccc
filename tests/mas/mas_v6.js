@@ -160,8 +160,8 @@ function draw() {
 	
 	//iFrame += 1;
 
-	text( k , 500,500);
-	text( m , 500,600);
+	//text( k , 500,500);
+	//text( m , 500,600);
 
 	omega = 2*3.1415926/period;
 	waveLength = (period/t_MAX)*frame_w; // px
@@ -438,6 +438,8 @@ function drawTrayectory_E() {
 	// Las unidades de tAxis se encuentran en pixeles
 	
 	var tAxis_final;
+
+	text()
 
 	if ( t < t_limit ){
 		tAxis_final = waveSpeed*t;
