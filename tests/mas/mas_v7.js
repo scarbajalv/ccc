@@ -10,6 +10,7 @@ let frame_w_factor = 0.75;
 let frame_h_factor = 0.5;
 let phase = 0;
 let text_default_factor = 0.03;
+let text_small_factor = 0.02;
 
 // ******************************
 
@@ -177,8 +178,12 @@ function setup() {
   radio_plot.option(2, ' v  ');
   radio_plot.option(3, ' a  ');
   radio_plot.option(4, ' E  ');
-  radio_plot.position(0.5*canvas_w-0.5*107, 0.07*canvas_h);
-  radio_plot.style('width', "107px");
+  radio_plot.position(0.5*canvas_w - 0.5*(4*10 + 0.2*canvas_w), 0.07*canvas_h);  
+  radio_plot.style("font-size", text_default_factor*canvas_w.toString()+"px");
+  radio_plot.style("text-align:center");
+  radio_plot.style("vertical-align:middle");
+  radio_plot.style('width', 4*10 + 0.2*canvas_w.toString()+"px");
+  
 
 }
 
@@ -194,7 +199,7 @@ function draw() {
 	stroke('black');
 	fill('white');
 
-	text( "update 0", 0.5*canvas_w, 0.5*canvas_h);
+	text( "update 1", 0.5*canvas_w, 0.5*canvas_h);
 	
 	//iFrame += 1;
 
@@ -661,7 +666,7 @@ function draw_TimeAxis() {
 		fill("white");
 		textAlign(CENTER, CENTER);
 		textSize(text_default_factor*canvas_w);
-		text("t (s)", frame_origin_x + frame_w/2 , frame_origin_y + 0.1*frame_h);
+		text("t (s)", frame_origin_x + frame_w/2 , frame_origin_y + 0.12*frame_h);
 	pop();
 	
 
@@ -718,7 +723,7 @@ function draw_yAxis_x(){
 	push();
 		noStroke();		
 		textAlign(CENTER, CENTER);
-		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
+		translate( frame_origin_x - 0.17*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
 		textSize(text_default_factor*canvas_w);
 		text("x (cm)", 0, 0);
@@ -747,7 +752,7 @@ function draw_yAxis_v(){
 	push();
 		noStroke();		
 		textAlign(CENTER, CENTER);
-		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
+		translate( frame_origin_x - 0.17*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
 		textSize(text_default_factor*canvas_w);
 		text("v (cm/s)", 0, 0);
@@ -775,10 +780,13 @@ function draw_yAxis_a(){
 	push();
 		noStroke();		
 		textAlign(CENTER, CENTER);
-		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
+		translate( frame_origin_x - 0.17*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
 		textSize(text_default_factor*canvas_w);
-		text("a (cm/s2)", 0, 0);
+		text("a (cm/s  )", 0, 0);
+		textSize(text_small_factor*canvas_w);
+		text("2", 0.09*frame_h, -0.01*frame_h);
+		textSize(text_default_factor*canvas_w);
 	pop();
 
 	stroke('white');
@@ -803,7 +811,7 @@ function draw_yAxis_E(){
 	push();
 		noStroke();		
 		textAlign(CENTER, CENTER);
-		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
+		translate( frame_origin_x - 0.17*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
 		textSize(text_default_factor*canvas_w);
 		text("E (mJ)", 0, 0);
