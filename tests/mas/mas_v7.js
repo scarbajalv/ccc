@@ -159,7 +159,7 @@ function draw() {
 	stroke('black');
 	fill('white');
 
-	//text( 0.2*canvas_w.toString(10)+'px', 500, 500);
+	text( "update 0", 500, 500);
 	
 	//iFrame += 1;
 
@@ -455,6 +455,7 @@ function draw_Oscillator(){
 
 	noStroke();
 	textAlign(CENTER, TOP);
+	textSize(0.025*canvas_w);
 	text( "-"+amplitude_cm , canvas_w/2 - (amplitude), ypos_oscillator + (1/100)*canvas_w);
 	text( "+"+amplitude_cm , canvas_w/2 + (amplitude), ypos_oscillator + (1/100)*canvas_w);
 	text( "x (cm)" , canvas_w/2 + (35/100)*canvas_w , ypos_oscillator);
