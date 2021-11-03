@@ -159,7 +159,7 @@ function draw() {
 	stroke('black');
 	fill('white');
 
-	text( "update 0", 500, 500);
+	text( "update 0", 0.5*canvas_w, 0.5*canvas_h);
 	
 	//iFrame += 1;
 
