@@ -148,12 +148,6 @@ function setup() {
   button_amplitude_increase.position(0.175*canvas_w, 0.1*canvas_h);
   button_amplitude_increase.mousePressed(f_amplitude_increase);*/
 
-  checkbox_time_evolve = createCheckbox(' Play', false);
-  checkbox_time_evolve.parent("simple-sketch-holder");
-  checkbox_time_evolve.position(0.8*canvas_w, 0.1*canvas_h);
-  checkbox_time_evolve.style("font-size", text_default_factor*canvas_w.toString()+"px");
-  //checkbox_time_evolve.changed(f_checkbox_time_evolve_changed);
-
   slider_time = createSlider(0, 10*framerate_custom, 
   	0, 0.1*framerate_custom);
   slider_time.input(f_slider_time_input);
@@ -161,10 +155,16 @@ function setup() {
   slider_time.position( (0.375)*canvas_w, (0.2)*canvas_h);
   slider_time.style('width', str(0.25*canvas_w)+'px');
 
+  checkbox_time_evolve = createCheckbox(' Play', false);
+  checkbox_time_evolve.parent("simple-sketch-holder");
+  checkbox_time_evolve.position(0.8*canvas_w, 0.1*canvas_h);
+  checkbox_time_evolve.style("font-size", "16px");
+  checkbox_time_evolve.style("text-align:center");
+
   checkbox_gridlines = createCheckbox(' Grid', false);
   checkbox_gridlines.parent("simple-sketch-holder");
   checkbox_gridlines.position(0.8*canvas_w, 0.15*canvas_h);
-  checkbox_gridlines.style("font-size", text_default_factor*canvas_w.toString()+"px");
+  checkbox_gridlines.style("font-size", "16px");
 
   push();
   	fill("white");
@@ -199,7 +199,7 @@ function draw() {
 	stroke('black');
 	fill('white');
 
-	text( "update 1", 0.5*canvas_w, 0.5*canvas_h);
+	text( "update 2", 0.5*canvas_w, 0.5*canvas_h);
 	
 	//iFrame += 1;
 
@@ -229,7 +229,9 @@ function draw() {
 	text("A = " + amplitude_cm.toFixed(0) + "cm", 0.05*canvas_w, 0.165*canvas_h);
 	textAlign(CENTER, CENTER);
 	text("t = " + t.toFixed(2) + "s", 0.5*canvas_w, (0.175)*canvas_h);
-	text("x = " + x_cm.toFixed(2) + " cm", (0.5)*canvas_w, (0.35)*canvas_h);
+	text("x = " + x_cm.toFixed(2) + " cm", (0.5)*canvas_w, (0.365)*canvas_h);
+	/*text("Play", 0.86*canvas_w, 0.1*canvas_h + 16/2);
+	text("Grid", 0.86*canvas_w, 0.15*canvas_h);*/
 	
 
 
