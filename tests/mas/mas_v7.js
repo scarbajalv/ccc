@@ -91,43 +91,44 @@ function setup() {
 	canvas.parent('simple-sketch-holder');
 	frameRate(framerate_custom);
 
+  var button_width_factor = 0.05;
+
   button_period_decrease = createButton("-");
   button_period_decrease.parent('simple-sketch-holder');
-  button_period_decrease.position(0.2*canvas_w, 0.1*canvas_w -  0.5*0.06*canvas_h);
+  button_period_decrease.position(0.2*canvas_w, 0.1*canvas_w -  0.5*button_width_factor*canvas_h);
   button_period_decrease.mousePressed(f_period_decrease);
-  button_period_decrease.style("width", 0.06*canvas_w.toString()+"px");
-  button_period_decrease.style("height", 0.06*canvas_w.toString()+"px");
+  button_period_decrease.style("width", button_width_factor*canvas_w.toString()+"px");
+  button_period_decrease.style("height", button_width_factor*canvas_w.toString()+"px");
   button_period_decrease.style("font-size", text_default_factor*canvas_w.toString()+"px");
   button_period_decrease.style("text-align:center");
-  button_period_decrease.style("padding:1px");
-  
+  button_period_decrease.style("padding:1px");  
 
   button_period_increase = createButton("+");
   button_period_increase.parent('simple-sketch-holder');
-  button_period_increase.position(0.2*canvas_w + 0.065*canvas_w , 0.1*canvas_w -  0.5*0.06*canvas_h);
+  button_period_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.1*canvas_w -  0.5*button_width_factor*canvas_h);
   button_period_increase.mousePressed(f_period_increase);
-  button_period_increase.style("width", 0.06*canvas_w.toString()+"px");
-  button_period_increase.style("height", 0.06*canvas_w.toString()+"px");
+  button_period_increase.style("width", button_width_factor*canvas_w.toString()+"px");
+  button_period_increase.style("height", button_width_factor*canvas_w.toString()+"px");
   button_period_increase.style("font-size", text_default_factor*canvas_w.toString()+"px");
   button_period_increase.style("text-align:center");
   button_period_increase.style("padding:1px");
 
   button_amplitude_decrease = createButton("-");
   button_amplitude_decrease.parent('simple-sketch-holder');
-  button_amplitude_decrease.position(0.2*canvas_w, 0.165*canvas_w -  0.5*0.06*canvas_h);
+  button_amplitude_decrease.position(0.2*canvas_w, 0.165*canvas_w -  0.5*button_width_factor*canvas_h);
   button_amplitude_decrease.mousePressed(f_amplitude_decrease);
-  button_amplitude_decrease.style("width", 0.06*canvas_w.toString()+"px");
-  button_amplitude_decrease.style("height", 0.06*canvas_w.toString()+"px");
+  button_amplitude_decrease.style("width", button_width_factor*canvas_w.toString()+"px");
+  button_amplitude_decrease.style("height", button_width_factor*canvas_w.toString()+"px");
   button_amplitude_decrease.style("font-size", text_default_factor*canvas_w.toString()+"px");
   button_amplitude_decrease.style("text-align:center");
   button_amplitude_decrease.style("padding:1px");  
 
   button_amplitude_increase = createButton("+");
   button_amplitude_increase.parent('simple-sketch-holder');
-  button_amplitude_increase.position(0.2*canvas_w + 0.065*canvas_w, 0.165*canvas_h -  0.5*0.06*canvas_w);
+  button_amplitude_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.165*canvas_h -  0.5*button_width_factor*canvas_w);
   button_amplitude_increase.mousePressed(f_amplitude_increase);
-  button_amplitude_increase.style("width", 0.06*canvas_w.toString()+"px");
-  button_amplitude_increase.style("height", 0.06*canvas_w.toString()+"px");
+  button_amplitude_increase.style("width", button_width_factor*canvas_w.toString()+"px");
+  button_amplitude_increase.style("height", button_width_factor*canvas_w.toString()+"px");
   button_amplitude_increase.style("font-size", text_default_factor*canvas_w.toString()+"px");
   button_amplitude_increase.style("text-align:center");
   button_amplitude_increase.style("padding:1px");
@@ -149,6 +150,7 @@ function setup() {
   checkbox_time_evolve = createCheckbox(' Play', false);
   checkbox_time_evolve.parent("simple-sketch-holder");
   checkbox_time_evolve.position(0.8*canvas_w, 0.1*canvas_h);
+  checkbox_time_evolve.style("font-size", text_default_factor*canvas_w.toString()+"px");
   //checkbox_time_evolve.changed(f_checkbox_time_evolve_changed);
 
   slider_time = createSlider(0, 10*framerate_custom, 
@@ -158,9 +160,10 @@ function setup() {
   slider_time.position( (0.375)*canvas_w, (0.2)*canvas_h);
   slider_time.style('width', str(0.25*canvas_w)+'px');
 
-  checkbox_gridlines = createCheckbox('Grid', false);
+  checkbox_gridlines = createCheckbox(' Grid', false);
   checkbox_gridlines.parent("simple-sketch-holder");
   checkbox_gridlines.position(0.8*canvas_w, 0.15*canvas_h);
+  checkbox_gridlines.style("font-size", text_default_factor*canvas_w.toString()+"px");
 
   push();
   	fill("white");
