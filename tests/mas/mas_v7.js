@@ -178,11 +178,11 @@ function setup() {
   radio_plot.option(2, ' v  ');
   radio_plot.option(3, ' a  ');
   radio_plot.option(4, ' E  ');
-  radio_plot.position(0.5*canvas_w - 0.5*(4*10 + 0.2*canvas_w), 0.07*canvas_h);  
-  radio_plot.style("font-size", text_default_factor*canvas_w.toString()+"px");
+  radio_plot.position(0.5*canvas_w - 0.5*(120), 0.07*canvas_h);  
+  radio_plot.style("font-size", "16px");
   radio_plot.style("text-align:center");
   radio_plot.style("vertical-align:middle");
-  radio_plot.style('width', 4*10 + 0.2*canvas_w.toString()+"px");
+  radio_plot.style('width', "120px");
   
 
 }
@@ -199,7 +199,7 @@ function draw() {
 	stroke('black');
 	fill('white');
 
-	text( "update 2", 0.5*canvas_w, 0.5*canvas_h);
+	text( "update 3", 0.5*canvas_w, 0.5*canvas_h);
 	
 	//iFrame += 1;
 
