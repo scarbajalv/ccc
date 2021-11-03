@@ -9,6 +9,7 @@ let frame_center_y_factor = 0.65;
 let frame_w_factor = 0.75;
 let frame_h_factor = 0.5;
 let phase = 0;
+let text_default_factor = 0.03;
 
 // ******************************
 
@@ -90,7 +91,7 @@ function setup() {
 	canvas.parent('simple-sketch-holder');
 	frameRate(framerate_custom);
 
-  /*button_period_decrease = createButton("-");
+  button_period_decrease = createButton("-");
   button_period_decrease.parent('simple-sketch-holder');
   button_period_decrease.style("width","25"+"px");
   button_period_decrease.position(0.125*canvas_w, 0.05*canvas_h);
@@ -100,9 +101,9 @@ function setup() {
   button_period_increase.parent('simple-sketch-holder');
   button_period_increase.position(0.175*canvas_w, 0.05*canvas_h);
   button_period_increase.style("width","25"+"px");
-  button_period_increase.mousePressed(f_period_increase);*/
+  button_period_increase.mousePressed(f_period_increase);
 
-  /*button_amplitude_decrease = createButton("-");
+  button_amplitude_decrease = createButton("-");
   button_amplitude_decrease.parent("simple-sketch-holder");
   button_amplitude_decrease.position(0.125*canvas_w, 0.1*canvas_h);
   button_amplitude_decrease.style("width","25px");
@@ -112,7 +113,7 @@ function setup() {
   button_amplitude_increase.parent("simple-sketch-holder");
   button_amplitude_increase.style("width", "25px");
   button_amplitude_increase.position(0.175*canvas_w, 0.1*canvas_h);
-  button_amplitude_increase.mousePressed(f_amplitude_increase);*/
+  button_amplitude_increase.mousePressed(f_amplitude_increase);
 
   checkbox_time_evolve = createCheckbox(' Play', false);
   checkbox_time_evolve.parent("simple-sketch-holder");
@@ -142,8 +143,8 @@ function setup() {
   radio_plot.option(2, ' v  ');
   radio_plot.option(3, ' a  ');
   radio_plot.option(4, ' E  ');
-  radio_plot.position(0.425*canvas_w, 0.07*canvas_h);
-  radio_plot.style('width', 0.2*canvas_w.toString(10)+'px');
+  radio_plot.position(0.5*canvas_w-0.5*107, 0.07*canvas_h);
+  radio_plot.style('width', "107px");
 
 }
 
@@ -184,7 +185,7 @@ function draw() {
 	//m = Math.pow((2*pi)/period,2)*k;
 
 	textAlign(CENTER, CENTER);
-	textSize(0.025*canvas_w);
+	textSize(text_default_factor*canvas_w);
 	text("t = " + t.toFixed(2) + "s", 0.5*canvas_w, (0.175)*canvas_h);
 	text("T = " + period.toFixed(2) + "s", 0.1*canvas_w, 0.1*canvas_h);
 	text("A = " + amplitude_cm.toFixed(0) + "cm", 0.1*canvas_w, 0.15*canvas_h);
@@ -236,6 +237,8 @@ function draw() {
 		strokeWeight(1);
 	}
 
+	/*
+
 	// BOTONES PARA PERIODO
 
 		push();
@@ -258,7 +261,7 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(0.025*canvas_w);
+			textSize(text_default_factor*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
@@ -282,7 +285,7 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(0.025*canvas_w);
+			textSize(text_default_factor*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
@@ -308,7 +311,7 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(0.025*canvas_w);
+			textSize(text_default_factor*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
@@ -332,11 +335,11 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(0.025*canvas_w);
+			textSize(text_default_factor*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
-
+	*/
 
 }
 
@@ -455,7 +458,7 @@ function draw_Oscillator(){
 
 	noStroke();
 	textAlign(CENTER, TOP);
-	textSize(0.025*canvas_w);
+	textSize(text_default_factor*canvas_w);
 	text( "-"+amplitude_cm , canvas_w/2 - (amplitude), ypos_oscillator + (1/100)*canvas_w);
 	text( "+"+amplitude_cm , canvas_w/2 + (amplitude), ypos_oscillator + (1/100)*canvas_w);
 	text( "x (cm)" , canvas_w/2 + (35/100)*canvas_w , ypos_oscillator);
@@ -621,7 +624,7 @@ function draw_TimeAxis() {
 		noStroke();
 		fill("white");
 		textAlign(CENTER, CENTER);
-		textSize(0.025*canvas_w);
+		textSize(text_default_factor*canvas_w);
 		text("t (s)", frame_origin_x + frame_w/2 , frame_origin_y + 0.1*frame_h);
 	pop();
 	
@@ -681,7 +684,7 @@ function draw_yAxis_x(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(0.025*canvas_w);
+		textSize(text_default_factor*canvas_w);
 		text("x (cm)", 0, 0);
 	pop();
 
@@ -710,7 +713,7 @@ function draw_yAxis_v(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(0.025*canvas_w);
+		textSize(text_default_factor*canvas_w);
 		text("v (cm/s)", 0, 0);
 	pop();
 
@@ -738,7 +741,7 @@ function draw_yAxis_a(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(0.025*canvas_w);
+		textSize(text_default_factor*canvas_w);
 		text("a (cm/s2)", 0, 0);
 	pop();
 
@@ -766,7 +769,7 @@ function draw_yAxis_E(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(0.025*canvas_w);
+		textSize(text_default_factor*canvas_w);
 		text("E (mJ)", 0, 0);
 	pop();
 
