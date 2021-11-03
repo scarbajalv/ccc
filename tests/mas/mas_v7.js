@@ -258,7 +258,7 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(20);
+			textSize(0.025*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
@@ -282,7 +282,7 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(20);
+			textSize(0.025*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
@@ -308,7 +308,7 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(20);
+			textSize(0.025*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
@@ -332,7 +332,7 @@ function draw() {
 			noStroke();
 			fill(255);
 			textAlign(CENTER, CENTER);
-			textSize(20);
+			textSize(0.025*canvas_w);
 			text(button_text, 0.5*button_w_factor*canvas_w, 0.5*button_w_factor*canvas_w);
 		pop();
 
@@ -620,7 +620,7 @@ function draw_TimeAxis() {
 		noStroke();
 		fill("white");
 		textAlign(CENTER, CENTER);
-		textSize(16);
+		textSize(0.025*canvas_w);
 		text("t (s)", frame_origin_x + frame_w/2 , frame_origin_y + 0.1*frame_h);
 	pop();
 	
@@ -680,7 +680,7 @@ function draw_yAxis_x(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(16);
+		textSize(0.025*canvas_w);
 		text("x (cm)", 0, 0);
 	pop();
 
@@ -709,7 +709,7 @@ function draw_yAxis_v(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(16);
+		textSize(0.025*canvas_w);
 		text("v (cm/s)", 0, 0);
 	pop();
 
@@ -737,7 +737,7 @@ function draw_yAxis_a(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(16);
+		textSize(0.025*canvas_w);
 		text("a (cm/s2)", 0, 0);
 	pop();
 
@@ -765,7 +765,7 @@ function draw_yAxis_E(){
 		textAlign(CENTER, CENTER);
 		translate( frame_origin_x - 0.1*frame_h, axis_zero_y);
 		rotate( - 3.1415/2 );
-		textSize(16);
+		textSize(0.025*canvas_w);
 		text("E (mJ)", 0, 0);
 	pop();
 
