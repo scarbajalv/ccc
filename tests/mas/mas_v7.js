@@ -96,7 +96,7 @@ function setup() {
 
   button_period_decrease = createButton("-");
   button_period_decrease.parent('simple-sketch-holder');
-  button_period_decrease.position(0.2*canvas_w, 0.1*canvas_w -  0.5*button_width_factor*canvas_h);
+  button_period_decrease.position(0.2*canvas_w, 0.12*canvas_w -  0.5*button_width_factor*canvas_h);
   button_period_decrease.mousePressed(f_period_decrease);
   button_period_decrease.style("width", button_width_factor*canvas_w.toString()+"px");
   button_period_decrease.style("height", button_width_factor*canvas_w.toString()+"px");
@@ -106,7 +106,7 @@ function setup() {
 
   button_period_increase = createButton("+");
   button_period_increase.parent('simple-sketch-holder');
-  button_period_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.1*canvas_w -  0.5*button_width_factor*canvas_h);
+  button_period_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.12*canvas_w -  0.5*button_width_factor*canvas_h);
   button_period_increase.mousePressed(f_period_increase);
   button_period_increase.style("width", button_width_factor*canvas_w.toString()+"px");
   button_period_increase.style("height", button_width_factor*canvas_w.toString()+"px");
@@ -116,7 +116,7 @@ function setup() {
 
   button_amplitude_decrease = createButton("-");
   button_amplitude_decrease.parent('simple-sketch-holder');
-  button_amplitude_decrease.position(0.2*canvas_w, 0.165*canvas_w -  0.5*button_width_factor*canvas_h);
+  button_amplitude_decrease.position(0.2*canvas_w, 0.185*canvas_w -  0.5*button_width_factor*canvas_h);
   button_amplitude_decrease.mousePressed(f_amplitude_decrease);
   button_amplitude_decrease.style("width", button_width_factor*canvas_w.toString()+"px");
   button_amplitude_decrease.style("height", button_width_factor*canvas_w.toString()+"px");
@@ -126,7 +126,7 @@ function setup() {
 
   button_amplitude_increase = createButton("+");
   button_amplitude_increase.parent('simple-sketch-holder');
-  button_amplitude_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.165*canvas_h -  0.5*button_width_factor*canvas_w);
+  button_amplitude_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.185*canvas_h -  0.5*button_width_factor*canvas_w);
   button_amplitude_increase.mousePressed(f_amplitude_increase);
   button_amplitude_increase.style("width", button_width_factor*canvas_w.toString()+"px");
   button_amplitude_increase.style("height", button_width_factor*canvas_w.toString()+"px");
@@ -178,11 +178,11 @@ function setup() {
   radio_plot.option(2, ' v  ');
   radio_plot.option(3, ' a  ');
   radio_plot.option(4, ' E  ');
-  radio_plot.position(0.5*canvas_w - 0.5*(120), 0.07*canvas_h);  
+  radio_plot.position(0.5*canvas_w - 0.5*(140), 0.05*canvas_h);  
   radio_plot.style("font-size", "16px");
   radio_plot.style("text-align:center");
   radio_plot.style("vertical-align:middle");
-  radio_plot.style('width', "120px");
+  radio_plot.style('width', "140px");
   
 
 }
@@ -225,8 +225,8 @@ function draw() {
 
 	textAlign(LEFT, CENTER);
 	textSize(text_default_factor*canvas_w);	
-	text("T = " + period.toFixed(2) + "s", 0.05*canvas_w, 0.1*canvas_h);
-	text("A = " + amplitude_cm.toFixed(0) + "cm", 0.05*canvas_w, 0.165*canvas_h);
+	text("T = " + period.toFixed(2) + "s", 0.05*canvas_w, 0.12*canvas_h);
+	text("A = " + amplitude_cm.toFixed(0) + "cm", 0.05*canvas_w, 0.185*canvas_h);
 	textAlign(CENTER, CENTER);
 	text("t = " + t.toFixed(2) + "s", 0.5*canvas_w, (0.175)*canvas_h);
 	text("x = " + x_cm.toFixed(2) + " cm", (0.5)*canvas_w, (0.365)*canvas_h);
