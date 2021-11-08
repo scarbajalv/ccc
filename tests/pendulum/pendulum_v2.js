@@ -18,6 +18,7 @@ let buttons_posX_fact = 0.1;
 let buttons_posY_fact = 0.1;
 
 let radio_plot_width;
+let checkbox_play_width;
 
 // ******************************
 
@@ -195,14 +196,15 @@ function setup() {
   slider_time.input(f_slider_time_input);
   slider_time.parent("simple-sketch-holder");
   slider_time.position( 0.075*canvas_w, 0.355*canvas_h);
-  slider_time.style('width', str(0.25*canvas_w)+'px');
+  slider_time.style('width', str(0.21*canvas_w)+'px');
 
   checkbox_time_evolve = createCheckbox(' Play', false);
   checkbox_time_evolve.parent("simple-sketch-holder");
   checkbox_time_evolve.position(0.19*canvas_w - 48/2, 0.05*canvas_h-22/2);
   checkbox_time_evolve.style("font-size", "16px");
   checkbox_time_evolve.style("text-align:center");
-  checkbox_time_evolve.style("color:black");
+  checkbox_time_evolve.style("color:black");  
+  checkbox_time_evolve.position(0.18*canvas_w - 48/2, 0.05*canvas_h-22/2);
 
   
 
@@ -240,8 +242,8 @@ function draw() {
 	noStroke();
 	fill('black');
 
-	text( "update 7", 0.5*canvas_w, 0.3*canvas_h);
-	text( radio_plot_width , 0.5*canvas_w, 0.35*canvas_h);
+	text( "update 8", 0.5*canvas_w, 0.3*canvas_h);
+	
 	
 	period = 2*3.1415926*sqrt(long/gravity);
 	omega = 2*3.1415926/period;
@@ -269,17 +271,18 @@ function draw() {
 		strokeWeight(0.002*canvas_w);
 		stroke("black");
 		noFill();
-		var borders = 0.0075*canvas_w;
+		var borders = 0.005*canvas_w;
 		
 		// L G theta//fill(250);
 		noFill();
-		rect(0.06*canvas_w, 0.105*canvas_h, 
-			0.25*canvas_w, 0.18*canvas_h, 
+		rect(0.066*canvas_w, 0.105*canvas_h, 
+			0.225*canvas_w, 0.18*canvas_h, 
 			borders);
 
 		// Play
-		rect(0.19*canvas_w - 48/2 - 10, 0.05*canvas_h-22/2 - 3, 
-			48 + 20, 30, 
+		var aux_width = 70;
+		rect(0.066*canvas_w + (0.225*canvas_w - aux_width)/2, 0.05*canvas_h-22/2 - 3, 
+			aux_width, 30, 
 			borders);
 
 		// Variables
@@ -289,7 +292,7 @@ function draw() {
 
 		// Slider
 		rect(0.05*canvas_w , 0.32*canvas_h, 
-			0.3*canvas_w, 0.075*canvas_h, 
+			0.265*canvas_w, 0.075*canvas_h, 
 			borders);
 
 	pop();
@@ -321,7 +324,7 @@ function draw() {
 
 	// Other Text
 	textAlign(LEFT, CENTER);
-	text("t = " + t.toFixed(2) + " s", 0.14*canvas_w, 0.34*canvas_h);
+	text("t = " + t.toFixed(2) + " s", 0.13*canvas_w, 0.34*canvas_h);
 	text("\u03B8 = " + theta_rad.toFixed(2) + " rad", 0.775*canvas_w, (0.125)*canvas_h);	
 	/*text("Play", 0.86*canvas_w, 0.1*canvas_h + 16/2);
 	text("Grid", 0.86*canvas_w, 0.15*canvas_h);*/
