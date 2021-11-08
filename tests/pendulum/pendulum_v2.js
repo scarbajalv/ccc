@@ -192,7 +192,7 @@ function setup() {
   	0, 0.1*framerate_custom);
   slider_time.input(f_slider_time_input);
   slider_time.parent("simple-sketch-holder");
-  slider_time.position( 0.075*canvas_w, 0.35*canvas_h);
+  slider_time.position( 0.075*canvas_w, 0.355*canvas_h);
   slider_time.style('width', str(0.25*canvas_w)+'px');
 
   checkbox_time_evolve = createCheckbox(' Play', false);
@@ -202,18 +202,7 @@ function setup() {
   checkbox_time_evolve.style("text-align:center");
   checkbox_time_evolve.style("color:black");
 
-  /*checkbox_gridlines = createCheckbox(' Grid', false);
-  checkbox_gridlines.parent("simple-sketch-holder");
-  checkbox_gridlines.position(0.2*canvas_w, 0.05*canvas_h);
-  checkbox_gridlines.style("font-size", "16px");
-  checkbox_gridlines.style("color:black");*/
-
-
-  /*push();
-  	fill("black");
-  	square_period_increase = square(500, 500, 200);
-  	square_period_decrease = square(600, 500, 200);
-  pop();*/
+  
 
   radio_plot = createRadio();
   radio_plot.parent("simple-sketch-holder");
@@ -224,9 +213,8 @@ function setup() {
   radio_plot.position(0.5*canvas_w - 0.5*(30*4), 0.44*canvas_h);  
   radio_plot.style("font-size", "16px");
   radio_plot.style("color", "black");
-  //radio_plot.style("text-align:center");
-  //radio_plot.style("vertical-align:middle");
-  //radio_plot.style('width', "120px");
+  radio_plot.style("padding-left:0px");
+  radio_plot.style("padding-right:0px");
 
 
   textFont('serif');
@@ -247,11 +235,6 @@ function draw() {
 	fill('black');
 
 	text( "update 4", 0.5*canvas_w, 0.5*canvas_h);
-	
-	//iFrame += 1;
-
-	//text( k , 500,500);
-	//text( m , 500,600);
 	
 	period = 2*3.1415926*sqrt(long/gravity);
 	omega = 2*3.1415926/period;
@@ -297,6 +280,11 @@ function draw() {
 			150, 35, 
 			borders);
 
+		// Slider
+		rect(0.05*canvas_w , 0.32*canvas_h, 
+			0.3*canvas_w, 0.075*canvas_h, 
+			borders);
+
 	pop();
 
 	
@@ -326,7 +314,7 @@ function draw() {
 
 	// Other Text
 	textAlign(LEFT, CENTER);
-	text("t = " + t.toFixed(2) + " s", 0.125*canvas_w, 0.35*canvas_h);
+	text("t = " + t.toFixed(2) + " s", 0.14*canvas_w, 0.34*canvas_h);
 	text("\u03B8 = " + theta_rad.toFixed(2) + " rad", 0.775*canvas_w, (0.125)*canvas_h);	
 	/*text("Play", 0.86*canvas_w, 0.1*canvas_h + 16/2);
 	text("Grid", 0.86*canvas_w, 0.15*canvas_h);*/

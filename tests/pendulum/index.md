@@ -11,6 +11,6 @@ layout: default
 Ejemplo:
 
 <div id="simple-sketch-holder" style="position: relative;">
-	<script type="text/javascript" src="pendulum_v1.js"></script>
+	<script type="text/javascript" src="pendulum_v2.js"></script>
 </div>
 
