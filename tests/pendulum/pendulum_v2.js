@@ -213,8 +213,10 @@ function setup() {
   radio_plot.position(0.5*canvas_w - 0.5*(30*4), 0.44*canvas_h);  
   radio_plot.style("font-size", "16px");
   radio_plot.style("color", "black");
+  radio_plot.style("background", "black");
   radio_plot.style("padding-left:0px");
   radio_plot.style("padding-right:0px");
+  //radio_plot.style("width:140px");
 
 
   textFont('serif');
@@ -234,7 +236,8 @@ function draw() {
 	noStroke();
 	fill('black');
 
-	text( "update 5", 0.5*canvas_w, 0.5*canvas_h);
+	text( "update 6", 0.5*canvas_w, 0.3*canvas_h);
+	text( radio_plot.style("width") , 0.5*canvas_w, 0.35*canvas_h);
 	
 	period = 2*3.1415926*sqrt(long/gravity);
 	omega = 2*3.1415926/period;
