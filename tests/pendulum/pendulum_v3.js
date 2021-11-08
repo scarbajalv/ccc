@@ -239,6 +239,7 @@ function setup() {
   	0.55*canvas_h -0.5*radio_plot_height - 0.5*1.4*radio_plot_height );
   //radio_plot.style("width:140px");
 
+  img_upn = loadImage('img-upn.png'); // Load the image
 
   textFont('serif');
   
@@ -257,7 +258,7 @@ function draw() {
 	noStroke();
 	fill('black');
 
-	text( radio_plot_height, 0.5*canvas_w, 0.3*canvas_h);
+	text( radio_plot_height, 0.5*canvas_w, 0.4*canvas_h);
 	
 	
 	period = 2*3.1415926*sqrt(long/gravity);
@@ -285,7 +286,7 @@ function draw() {
 		
 		strokeWeight(0.002*canvas_w);
 		stroke("black");
-		fill(240, 244, 255);
+		fill(255, 239, 201);
 		//fill(255, 243, 230);
 		
 		var borders = 0.005*canvas_w;
@@ -315,7 +316,7 @@ function draw() {
 			borders);
 
 		// Variables
-		fill(240, 244, 255);
+		fill(255, 239, 201);
 		rect(0.5*canvas_w -  0.5*(120) - 15, 0.55*canvas_h, 
 			150, - 1.4*radio_plot_height, 
 			borders);
@@ -332,8 +333,30 @@ function draw() {
 	text("g", 0.12*canvas_w + panel_move_x, 0.20*canvas_h + panel_move_y);
 	text("\u03b8Max", 0.12*canvas_w + panel_move_x, 0.25*canvas_h + panel_move_y);
 
+	var move_x = 0.01*canvas_w;
+	var move_y = 0.01*canvas_h;
+
+	push();
+		translate( 0.0*canvas_w, 0.07*canvas_h);
+		textAlign(RIGHT, CENTER);
+		textSize(text_default_factor*canvas_w);
+		text("L = ", 0.45*canvas_w, 0.12*canvas_h);	
+		text("g = ", 0.45*canvas_w, 0.16*canvas_h);
+		text("\u03b8Max = ", 0.5*canvas_w, 0.20*canvas_h);
+		text("T = ", 0.45*canvas_w, 0.24*canvas_h);
+
+		textAlign(LEFT, CENTER);
+		textSize(text_default_factor*canvas_w);
+		text(long.toFixed(2) + " m", 0.45*canvas_w, 0.12*canvas_h);
+		text(gravity.toFixed(2) + " m/s2", 0.45*canvas_w, 0.16*canvas_h);
+		text(thetaMax_deg.toFixed(0) + "°" + " (" + (thetaMax_deg/180*3.1415).toFixed(2) + " rad)", 
+			0.5*canvas_w, 0.20*canvas_h);
+		text(period.toFixed(2) + "s", 0.45*canvas_w, 0.24*canvas_h);
+		text("\u03B8 = " + theta_rad.toFixed(2) + " rad", 0.8*canvas_w, (0.125)*canvas_h);	
+	pop();
+
 	// Figure Text
-	textAlign(RIGHT, CENTER);
+	/*textAlign(RIGHT, CENTER);
 	textSize(text_default_factor*canvas_w);
 	text("L = ", 0.45*canvas_w, 0.12*canvas_h);	
 	text("g = ", 0.45*canvas_w, 0.16*canvas_h);
@@ -346,12 +369,13 @@ function draw() {
 	text(gravity.toFixed(2) + " m/s2", 0.45*canvas_w, 0.16*canvas_h);
 	text(thetaMax_deg.toFixed(0) + "°" + " (" + (thetaMax_deg/180*3.1415).toFixed(2) + " rad)", 
 		0.5*canvas_w, 0.20*canvas_h);
-	text(period.toFixed(2) + "s", 0.45*canvas_w, 0.24*canvas_h);
+	text(period.toFixed(2) + "s", 0.45*canvas_w, 0.24*canvas_h);*/
 
 	// Other Text
 	textAlign(LEFT, CENTER);
+	textSize(text_default_factor*canvas_w);
 	text("t = " + t.toFixed(2) + " s", 0.13*canvas_w + panel_move_x, 0.325*canvas_h + panel_move_y);
-	text("\u03B8 = " + theta_rad.toFixed(2) + " rad", 0.8*canvas_w, (0.125)*canvas_h);	
+	
 	/*text("Play", 0.86*canvas_w, 0.1*canvas_h + 16/2);
 	text("Grid", 0.86*canvas_w, 0.15*canvas_h);*/
 
@@ -406,7 +430,11 @@ function draw() {
 
 	// Variable Plot Frame
 	push();
-		
+		var imgfactor = 0.25;
+		image(img_upn, 
+			0.86*canvas_w - canvas_w*imgfactor/2, 
+			0.045*canvas_h - 0.5*canvas_w*imgfactor/329*153, 
+			canvas_w*imgfactor, canvas_w*imgfactor/329*153);
 	pop();
 
 
@@ -505,7 +533,7 @@ function draw_Oscillator(){
 	pop();
 
 	push();
-		fill("orange");
+		fill(255, 184, 25);
 		stroke("black");
 		strokeWeight(0.004*canvas_w);
 		circle( pendulum_vertex_x + long_factor*canvas_h*sin(theta_rad), 
