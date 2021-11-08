@@ -87,6 +87,9 @@ let frame_origin_y = 0;
 
 function setup() {
 
+	noStroke();
+	fill("black");
+
 	// Establecer dimensiones del canvas
 	if(windowWidth > 650) canvas_w = 650;
 	else canvas_w = windowWidth - 55;
@@ -189,7 +192,7 @@ function setup() {
   	0, 0.1*framerate_custom);
   slider_time.input(f_slider_time_input);
   slider_time.parent("simple-sketch-holder");
-  slider_time.position( 0.125*canvas_w, 0.375*canvas_h);
+  slider_time.position( 0.075*canvas_w, 0.375*canvas_h);
   slider_time.style('width', str(0.25*canvas_w)+'px');
 
   checkbox_time_evolve = createCheckbox(' Play', false);
