@@ -221,12 +221,12 @@ function setup() {
   radio_plot.option(2, ' \u03c9  ');
   radio_plot.option(3, ' \u03b1  ');
   radio_plot.option(4, ' E  ');
-  radio_plot.position(0.5*canvas_w - 0.5*(120), 0.44*canvas_h);  
+  radio_plot.position(0.5*canvas_w - 0.5*(30*4), 0.44*canvas_h);  
   radio_plot.style("font-size", "16px");
   radio_plot.style("color", "black");
   //radio_plot.style("text-align:center");
   //radio_plot.style("vertical-align:middle");
-  radio_plot.style('width', "140px");
+  //radio_plot.style('width', "120px");
 
 
   textFont('serif');
