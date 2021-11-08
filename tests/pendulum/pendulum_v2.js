@@ -17,6 +17,8 @@ let text_huge_factor = 0.04;
 let buttons_posX_fact = 0.1;
 let buttons_posY_fact = 0.1;
 
+let radio_plot_width;
+
 // ******************************
 
 let x;
@@ -209,13 +211,15 @@ function setup() {
   radio_plot.option(1, ' \u03b8  ');
   radio_plot.option(2, ' \u03c9  ');
   radio_plot.option(3, ' \u03b1  ');
-  radio_plot.option(4, ' E  ');
-  radio_plot.position(0.5*canvas_w - 0.5*(30*4), 0.44*canvas_h);  
+  radio_plot.option(4, ' E  ');    
   radio_plot.style("font-size", "16px");
   radio_plot.style("color", "black");
-  radio_plot.style("background", "black");
+  //radio_plot.style("background", "black");
   radio_plot.style("padding-left:0px");
-  radio_plot.style("padding-right:0px");
+  radio_plot.style("padding-right:0px");  
+  radio_plot.position(0.5*canvas_w - 0.5*(30*4), 0.44*canvas_h);
+  radio_plot_width = radio_plot.style("width").substring(0,3);
+  radio_plot.position(0.5*canvas_w - 0.5*(radio_plot_width), 0.44*canvas_h);
   //radio_plot.style("width:140px");
 
 
@@ -236,8 +240,8 @@ function draw() {
 	noStroke();
 	fill('black');
 
-	text( "update 6", 0.5*canvas_w, 0.3*canvas_h);
-	text( radio_plot.style("width") , 0.5*canvas_w, 0.35*canvas_h);
+	text( "update 7", 0.5*canvas_w, 0.3*canvas_h);
+	text( radio_plot_width , 0.5*canvas_w, 0.35*canvas_h);
 	
 	period = 2*3.1415926*sqrt(long/gravity);
 	omega = 2*3.1415926/period;
