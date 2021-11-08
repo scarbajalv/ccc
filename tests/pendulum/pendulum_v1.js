@@ -246,7 +246,7 @@ function draw() {
 	noStroke();
 	fill('black');
 
-	//text( "update 3", 0.5*canvas_w, 0.5*canvas_h);
+	text( "update 4", 0.5*canvas_w, 0.5*canvas_h);
 	
 	//iFrame += 1;
 
