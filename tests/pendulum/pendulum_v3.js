@@ -19,6 +19,7 @@ let buttons_posY_fact = 0.1;
 
 let radio_plot_width;
 let checkbox_play_width;
+let checkbox_play_height;
 
 // ******************************
 
@@ -195,16 +196,22 @@ function setup() {
   	0, 0.1*framerate_custom);
   slider_time.input(f_slider_time_input);
   slider_time.parent("simple-sketch-holder");
-  slider_time.position( 0.075*canvas_w, 0.355*canvas_h);
+  slider_time.position( 0.075*canvas_w, 0.34*canvas_h);
   slider_time.style('width', str(0.21*canvas_w)+'px');
 
   checkbox_time_evolve = createCheckbox(' Play', false);
   checkbox_time_evolve.parent("simple-sketch-holder");
-  checkbox_time_evolve.position(0.19*canvas_w - 48/2, 0.05*canvas_h-22/2);
+  checkbox_time_evolve.position(0.19*canvas_w - 48/2, 0.06*canvas_h-22/2);
   checkbox_time_evolve.style("font-size", "16px");
   checkbox_time_evolve.style("text-align:center");
-  checkbox_time_evolve.style("color:black");  
-  checkbox_time_evolve.position(0.18*canvas_w - 48/2, 0.05*canvas_h-22/2);
+  checkbox_time_evolve.style("color:black");
+  checkbox_play_height = checkbox_time_evolve.style("height").substring(0,2);
+  //checkbox_time_evolve.position(0.18*canvas_w - 48/2, 0.071*canvas_h - 0.5*checkbox_play_height);
+  checkbox_time_evolve.position(0.18*canvas_w - 48/2, 
+  	//0.09*canvas_h - 1.4*checkbox_play_height + 0.5*checkbox_play_height);
+  	0.09*canvas_h - 0.5*checkbox_play_height - 0.5*1.4*checkbox_play_height);
+
+  
 
   
 
@@ -242,7 +249,7 @@ function draw() {
 	noStroke();
 	fill('black');
 
-	text( "update 8", 0.5*canvas_w, 0.3*canvas_h);
+	text( "update 8" + checkbox_play_height, 0.5*canvas_w, 0.3*canvas_h);
 	
 	
 	period = 2*3.1415926*sqrt(long/gravity);
@@ -270,12 +277,14 @@ function draw() {
 		
 		strokeWeight(0.002*canvas_w);
 		stroke("black");
-		fill(200);
+		fill(240, 244, 255);
+		//fill(255, 243, 230);
+		
 		var borders = 0.005*canvas_w;
 
 		// All
-		rect(0.03*canvas_w , 0.015*canvas_h, 
-		0.298*canvas_w, 0.4*canvas_h, 
+		rect(0.03*canvas_w , 0.105*canvas_h - 1.4*checkbox_play_height - 0.03*canvas_h, 
+		0.298*canvas_w, 1.4*checkbox_play_height + 0.315*canvas_h, 
 		borders);
 
 		stroke("black");
@@ -288,17 +297,17 @@ function draw() {
 
 		// Play
 		var aux_width = 70;
-		rect(0.066*canvas_w + (0.225*canvas_w - aux_width)/2, 0.05*canvas_h-22/2 - 3, 
-			aux_width, 30, 
+		rect(0.066*canvas_w + (0.225*canvas_w - aux_width)/2, 0.09*canvas_h, 
+			aux_width, -1.4*checkbox_play_height, 
 			borders);
 
 		// Slider
-		rect(0.05*canvas_w , 0.32*canvas_h, 
+		rect(0.05*canvas_w , 0.30*canvas_h, 
 			0.259*canvas_w, 0.075*canvas_h, 
 			borders);
 
 		// Variables
-		fill(225);
+		fill(240, 244, 255);
 		rect(0.5*canvas_w -  0.5*(120) - 15, 0.44*canvas_h - 5, 
 			150, 35, 
 			borders);
@@ -333,7 +342,7 @@ function draw() {
 
 	// Other Text
 	textAlign(LEFT, CENTER);
-	text("t = " + t.toFixed(2) + " s", 0.13*canvas_w, 0.34*canvas_h);
+	text("t = " + t.toFixed(2) + " s", 0.13*canvas_w, 0.325*canvas_h);
 	text("\u03B8 = " + theta_rad.toFixed(2) + " rad", 0.8*canvas_w, (0.125)*canvas_h);	
 	/*text("Play", 0.86*canvas_w, 0.1*canvas_h + 16/2);
 	text("Grid", 0.86*canvas_w, 0.15*canvas_h);*/
