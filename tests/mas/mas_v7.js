@@ -73,7 +73,7 @@ function setup() {
 	// Establecer dimensiones del canvas
 	if(windowWidth > 650) canvas_w = 650;
 	else canvas_w = windowWidth - 55;
-	canvas_h = canvas_w;
+	canvas_h = 1.2*canvas_w;
 
 	frame_origin_x = (frame_center_x_factor - 0.5*frame_w_factor)*canvas_w;
 	frame_origin_y = (frame_center_y_factor + 0.5*frame_h_factor)*canvas_h;
@@ -96,7 +96,7 @@ function setup() {
 
   button_period_decrease = createButton("-");
   button_period_decrease.parent('simple-sketch-holder');
-  button_period_decrease.position(0.2*canvas_w, 0.12*canvas_w -  0.5*button_width_factor*canvas_h);
+  button_period_decrease.position(0.2*canvas_w, 0.12*canvas_h -  0.5*button_width_factor*canvas_h);
   button_period_decrease.mousePressed(f_period_decrease);
   button_period_decrease.style("width", button_width_factor*canvas_w.toString()+"px");
   button_period_decrease.style("height", button_width_factor*canvas_w.toString()+"px");
@@ -106,7 +106,7 @@ function setup() {
 
   button_period_increase = createButton("+");
   button_period_increase.parent('simple-sketch-holder');
-  button_period_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.12*canvas_w -  0.5*button_width_factor*canvas_h);
+  button_period_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.12*canvas_h -  0.5*button_width_factor*canvas_h);
   button_period_increase.mousePressed(f_period_increase);
   button_period_increase.style("width", button_width_factor*canvas_w.toString()+"px");
   button_period_increase.style("height", button_width_factor*canvas_w.toString()+"px");
@@ -116,7 +116,7 @@ function setup() {
 
   button_amplitude_decrease = createButton("-");
   button_amplitude_decrease.parent('simple-sketch-holder');
-  button_amplitude_decrease.position(0.2*canvas_w, 0.185*canvas_w -  0.5*button_width_factor*canvas_h);
+  button_amplitude_decrease.position(0.2*canvas_w, 0.185*canvas_h -  0.5*button_width_factor*canvas_h);
   button_amplitude_decrease.mousePressed(f_amplitude_decrease);
   button_amplitude_decrease.style("width", button_width_factor*canvas_w.toString()+"px");
   button_amplitude_decrease.style("height", button_width_factor*canvas_w.toString()+"px");
@@ -126,7 +126,7 @@ function setup() {
 
   button_amplitude_increase = createButton("+");
   button_amplitude_increase.parent('simple-sketch-holder');
-  button_amplitude_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.185*canvas_h -  0.5*button_width_factor*canvas_w);
+  button_amplitude_increase.position(0.2*canvas_w + button_width_factor*canvas_w + 2, 0.185*canvas_h -  0.5*button_width_factor*canvas_h);
   button_amplitude_increase.mousePressed(f_amplitude_increase);
   button_amplitude_increase.style("width", button_width_factor*canvas_w.toString()+"px");
   button_amplitude_increase.style("height", button_width_factor*canvas_w.toString()+"px");

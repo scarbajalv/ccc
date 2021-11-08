@@ -1,0 +1,50 @@
+Opening in existing browser session.
+Opening in existing browser session.
+[3255:3255:0206/230746.729379:ERROR:sandbox_linux.cc(372)] InitializeSandbox() called with multiple threads in process gpu-process.
+[1,1443506112:04:07:53.607167] Native Client module will be loaded at base address 0x0000362600000000
+[3604:1:0206/230855.642124:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4027:1:0206/231300.643071:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4059:1:0206/231305.606677:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4059:1:0206/231305.607474:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4367:1:0206/231656.722688:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4409:1:0206/231706.322815:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4409:1:0206/231706.323375:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4488:1:0206/231922.444998:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4527:1:0206/231930.314452:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4527:1:0206/231930.315390:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4569:1:0206/231944.000539:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4569:1:0206/231944.001462:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4639:1:0206/232000.283285:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4639:1:0206/232000.283802:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4764:1:0206/232024.048874:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4800:1:0206/232031.346133:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4800:1:0206/232031.346850:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4814:1:0206/232328.705841:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[4814:1:0206/232328.707223:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5012:1:0206/232334.308877:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5012:1:0206/232334.309753:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5038:1:0206/232336.826110:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5038:1:0206/232336.826742:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5064:1:0206/232338.643785:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5064:1:0206/232338.644802:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5475:1:0206/232854.186618:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5475:1:0206/232854.187548:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5492:1:0206/232928.777451:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5492:1:0206/232928.778341:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5531:1:0206/233044.848726:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5531:1:0206/233044.849326:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[5940:1:0206/234112.819277:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[6165:1:0206/234515.858003:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[6165:13:0206/234516.998082:ERROR:data_channel.cc(53)] Accepting maxRetransmits = -1 for backwards compatibility
+[6165:13:0206/234516.998180:ERROR:data_channel.cc(58)] Accepting maxRetransmitTime = -1 for backwards compatibility
+[6377:1:0206/234831.792836:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+[6811:1:0206/235019.090331:ERROR:child_process_sandbox_support_impl_linux.cc(79)] FontService unique font name matching request did not receive a response.
+Opening in existing browser session.
+[3221:3221:0207/000311.011592:ERROR:zygote_communication_linux.cc(276)] Failed to send GetTerminationStatus message to zygote
+[3221:3221:0207/000311.012639:ERROR:zygote_communication_linux.cc(276)] Failed to send GetTerminationStatus message to zygote
+[3221:3221:0207/000311.016273:ERROR:zygote_communication_linux.cc(276)] Failed to send GetTerminationStatus message to zygote
+[3221:3239:0207/000311.019041:ERROR:socket_stream.cc(218)] Closing stream with result -2
+[3221:3221:0207/000311.020376:ERROR:zygote_communication_linux.cc(276)] Failed to send GetTerminationStatus message to zygote
+[3221:3221:0207/000311.023020:ERROR:zygote_communication_linux.cc(276)] Failed to send GetTerminationStatus message to zygote
+[3221:3239:0207/000311.039803:ERROR:zygote_communication_linux.cc(276)] Failed to send GetTerminationStatus message to zygote
+[7236:7236:0207/000311.131448:ERROR:sandbox_linux.cc(372)] InitializeSandbox() called with multiple threads in process gpu-process.

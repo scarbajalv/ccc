@@ -14,9 +14,11 @@ Ejemplos:
 
 [Luna y Tierra orbitando al Sol](./tests/earthmoon_01/index.html)
 
-[MAS_pos](./tests/mas/index.html)
+[MAS](./tests/mas/index.html)
 
-[MAS_vel](./tests/mas_speed/index.html)
+[Pendulum](./tests/pendulum/index.html)
+
+
 
 <!--
 <div id="simple-sketch-holder" style="position: relative;">
