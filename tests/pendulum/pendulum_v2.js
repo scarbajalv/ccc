@@ -234,7 +234,7 @@ function draw() {
 	noStroke();
 	fill('black');
 
-	text( "update 4", 0.5*canvas_w, 0.5*canvas_h);
+	text( "update 5", 0.5*canvas_w, 0.5*canvas_h);
 	
 	period = 2*3.1415926*sqrt(long/gravity);
 	omega = 2*3.1415926/period;
@@ -259,7 +259,7 @@ function draw() {
 	// Buttons Frame
 	push();
 		
-		strokeWeight(0.003*canvas_w);
+		strokeWeight(0.002*canvas_w);
 		stroke("black");
 		noFill();
 		var borders = 0.0075*canvas_w;
